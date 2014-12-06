@@ -6,14 +6,18 @@ using System.Threading.Tasks;
 
 namespace project
 {
+    /// <summary>
+    /// Class to represent a single line in the database and in the file
+    /// </summary>
     class StateWeatherInfo
     {
         enum HeaderOptions { StateCode, Division, YearMonth, PCP, TAVG, PDSI, PHDI, ZNDX, PMDI, CDD, HDD, SP01, SP02, SP03, SP06, SP09, SP12, SP24, TMIN, TMAX, END };
 
-        #region data members
+        #region database data members
 
         private int stateCode = 0;
-        private YearMonth yearMonth;
+        private Int16 year = 0;
+        private byte month = 0;
         private decimal tavg = 0;
         private decimal tmin = 0;
         private decimal tmax = 0;
@@ -26,17 +30,17 @@ namespace project
             get { return stateCode; }
             set { stateCode = value; }
         }
-        
-        public int Year
+
+        public Int16 Year
         {
-            get { return yearMonth.Year; }
-            set { yearMonth.Year = value; }
+            get { return year; }
+            set { year = value; }
         }
-        
-        public int Month
+
+        public byte Month
         {
-            get { return yearMonth.Month; }
-            set { yearMonth.Month = value; }
+            get { return month; }
+            set { month = value; }
         }
         
         public decimal Tavg
@@ -77,72 +81,105 @@ namespace project
         
         #endregion
 
+
+        #region validation data members
+
         private List<String> FailedParses = new List<string>();
-        private Boolean isValid = true;
+        private bool isValid = true;
 
-        public Boolean IsValid { get; }
-
-
-        public StateWeatherInfo()
-        {
+        public bool IsValid 
+        { 
+            get { return isValid; } 
         }
 
-        
+        #endregion
+
+
+        /// <summary>
+        /// Fills in the structure of data from the file
+        /// </summary>
+        /// <param name="data">Data split by "," from a file</param>
         public StateWeatherInfo(string[] data)
         {
+            // ensures data has enough lines
             if(data.Count() != (int)HeaderOptions.END)
             {
                 isValid = false;
             }
             else
             {
+                // attempts to parse state code
                 if (!(int.TryParse(data[(int)HeaderOptions.StateCode].Trim(), out stateCode)))
                 {
                     FailedParses.Add("StateCode");
                     isValid = false;
                 }
 
-                int tempYear = 0;
-                int tempMonth = 0;
+                // attempts to parse the year and month
+                Int16 tempYear = 0;
+                byte tempMonth = 0;
                 if (Helper.ParseYearMonth(data[(int)HeaderOptions.YearMonth].Trim(), out tempYear, out tempMonth))
                 {
-                    this.yearMonth = new YearMonth(tempYear, tempMonth);
+                    year = tempYear;
+                    month = tempMonth;
                 }
                 else
                 {
                     FailedParses.Add("YearMonth");
                 }
 
-                if(!(Decimal.TryParse(data[(int)HeaderOptions.PCP].Trim(),out pcp)))
+                // attempts to parse the pcp, and transform it into mm
+                if(Decimal.TryParse(data[(int)HeaderOptions.PCP].Trim(),out pcp))
+                {
+                    pcp = Helper.InchesToMM(pcp);
+                }
+                else
                 {
                     FailedParses.Add("PCP");
                     isValid = false;
                 }
 
-                if (!(Decimal.TryParse(data[(int)HeaderOptions.TAVG].Trim(), out tavg)))
+                // attempts to parse the tavg, and transform it into celcius
+                if (Decimal.TryParse(data[(int)HeaderOptions.TAVG].Trim(), out tavg))
+                {
+                    tavg = Helper.FahrenheitToCelcius(tavg);
+                }
+                else
                 {
                     FailedParses.Add("TAVG");
                     isValid = false;
                 }
 
-                if (!(Decimal.TryParse(data[(int)HeaderOptions.TMIN].Trim(), out tmin)))
+                // attempts to parse the tmin, and transform it into celcius
+                if (Decimal.TryParse(data[(int)HeaderOptions.TMIN].Trim(), out tmin))
+                {
+                    tmin = Helper.FahrenheitToCelcius(tmin);
+                }
+                else
                 {
                     FailedParses.Add("TMIN");
                     isValid = false;
                 }
 
-                if (!(Decimal.TryParse(data[(int)HeaderOptions.TMAX].Trim(), out tmax)))
+                // attempts to parse the tmax, and transform it into celcius
+                if (Decimal.TryParse(data[(int)HeaderOptions.TMAX].Trim(), out tmax))
+                {
+                    tmax = Helper.FahrenheitToCelcius(tmax);
+                }
+                else
                 {
                     FailedParses.Add("TMAX");
                     isValid = false;
                 }
 
+                // attempts to parse the cdd
                 if (!(int.TryParse(data[(int)HeaderOptions.CDD].Trim(), out cdd)))
                 {
                     FailedParses.Add("CDD");
                     isValid = false;
                 }
 
+                // attempts to parse the hdd
                 if (!(int.TryParse(data[(int)HeaderOptions.HDD].Trim(), out hdd)))
                 {
                     FailedParses.Add("HDD");
@@ -150,12 +187,17 @@ namespace project
                 }
             }
 
-            if (IsValid)
+            // if something is invalid, set to known data
+            if (!IsValid)
             {
                 SetDefaults();
             }
         }
+        
 
+        /// <summary>
+        /// Sets all database data members to known values
+        /// </summary>
         private void SetDefaults()
         {
             stateCode = -1;
@@ -169,6 +211,11 @@ namespace project
             HDD = 0;
         }
 
+
+        /// <summary>
+        /// Creates a string enumerating the errors while parsing
+        /// </summary>
+        /// <returns>Error list</returns>
         public string GetErrors()
         {
             StringBuilder errors = new StringBuilder();
@@ -180,20 +227,23 @@ namespace project
             return errors.ToString();
         }
 
-        // insert into values
-        public static string InsertHeader()
-        {
-            string sql = string.Empty;
 
-            return sql;
+
+        //TODO
+        // insert into values
+        public static string InsertHeader(string tableName)
+        {
+            StringBuilder sql = new StringBuilder();
+
+            return sql.ToString();
         }
 
         // ( data )
         public string InsertLine ()
         {
-            string sql = string.Empty;
+            StringBuilder sql = new StringBuilder();
 
-            return sql;
+            return sql.ToString();
         }
 
     }

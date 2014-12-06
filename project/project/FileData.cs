@@ -9,31 +9,48 @@ using System.Threading.Tasks;
 
 namespace project
 {
+    /// <summary>
+    /// Class to emulate a file full of data
+    /// </summary>
     public class FileData
     {
-        
         List<StateWeatherInfo> info;
 
 
-        public FileData()
+        /// <summary>
+        /// Creates a new info list, and loads data from a file
+        /// </summary>
+        /// <param name="UserName">User requesting load</param>
+        /// <param name="filename">Filename to load</param>
+        /// <returns>True on success</returns>
+        public bool Load(string UserName, string filename)
         {
-        }
-
-        public bool Load(string filename)
-        {
-            //LOG attempting to load
             bool successfulLoad = true;
             info = new List<StateWeatherInfo>();
+            string[] lines = null;
 
-            string[] lines = File.ReadAllLines(filename);
+            // attempts to read lines to a file
+            try
+            {
+                lines = File.ReadAllLines(filename);
+            }
+            catch (Exception e)
+            {
+                // logs an exception
+                StringBuilder builder = new StringBuilder();
+                Helper.BuildErrorMessage(e, ref builder);
+                Logging.LogError(UserName, builder.ToString());
+                successfulLoad = false;
+            }
 
             // line number = 0 is file headers
             int lineNumber = 1;
             while (lineNumber < lines.Count() && successfulLoad == true)
             {
-                string[] data = lines[lineNumber].Split(',');
                 try
                 {
+                    // attempts to split data and enter ino a new state weather info
+                    string[] data = lines[lineNumber].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                     StateWeatherInfo temp = new StateWeatherInfo(data);
                     if(temp.IsValid)
                     {
@@ -41,12 +58,19 @@ namespace project
                     }
                     else
                     {
-                        //LOG temp.GetErrors(); add line number before it and that you are ignoring it.
+                        // logs an error
+                        StringBuilder builder = new StringBuilder();
+                        builder.AppendLine("Error on line number " + lineNumber.ToString());
+                        builder.AppendLine(temp.GetErrors());
+                        Logging.LogError(UserName, builder.ToString());
                     }
                 }
                 catch (Exception ex)
                 {
-                    //LOG failed loading exception ex.Message
+                    // logs an exception
+                    StringBuilder builder = new StringBuilder();
+                    Helper.BuildErrorMessage(ex, ref builder);
+                    Logging.LogError(UserName, builder.ToString());
                     successfulLoad = false;
                 }
                 ++lineNumber;
@@ -54,14 +78,28 @@ namespace project
             return successfulLoad;
         }
 
-        public bool Insert()
+
+
+        //TODO
+        public bool Insert(string UserName, string TableName, bool dataPresent, bool overwrite)
         {
             bool successfulInsert = true;
-            //LOG attempting to insert
+
+            #region logging data
+
+            Int16 iYear = info.First().Year;
+            byte iMonth = info.First().Month;
+            Int16 fYear = info.Last().Year;
+            byte fMonth = info.Last().Month;
+            DateTime initialTime = DateTime.UtcNow;
+
+            #endregion
+
             try
             {
                 #region first pass
 
+                /*
                 //FIRSTPASS
                 // list of year months to be made
                 List<YearMonth> ToBeMade = new List<YearMonth>();
@@ -87,6 +125,7 @@ namespace project
                 }
 
                 // send SQL
+                */
 
                 #endregion
 
@@ -108,10 +147,13 @@ namespace project
 
                 #endregion
 
+                Logging.Log(UserName, iYear, iMonth, fYear, fMonth, initialTime, dataPresent, overwrite);
             }
             catch (Exception ex)
             {
-                //LOG failed inserting, rolling back
+                StringBuilder builder = new StringBuilder();
+                Helper.BuildErrorMessage(ex, ref builder);
+                Logging.LogError(UserName, builder.ToString());
                 successfulInsert = false;
             }
             return successfulInsert;
