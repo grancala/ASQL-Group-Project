@@ -1,0 +1,36 @@
+Database
+
+User
+	primary key (userID)
+	userID int/GUID
+	userName string
+	userPassword string
+	userPremission int, fk to UserPremission
+
+UserPremission
+	primary key (id)
+	id int
+	description string
+
+StateTemperatures
+	primary key (userID, stateCode, yearMonth)
+	userID int/GUID, fk to User
+	stateCode int, fk to State
+	yearMonth int, fk to YearMonth
+	PCP decimal
+	CDD int
+	HDD int
+	TAVG decimal
+	TMIN decimal
+	TMAX decimal
+
+State
+	primary key (stateCode)
+	stateCode int
+	stateName string
+
+YearMonth
+	primary key (id)
+	id int
+	year int
+	month int
