@@ -103,7 +103,7 @@ namespace project
         /// <param name="toLog">Data to log</param>
         private static void WriteFile(string toLog)
         {
-            using (StreamWriter writer = new StreamWriter(FileName))
+            using (StreamWriter writer = new StreamWriter(FileName, true))
             {
                 writer.Write(toLog);
                 writer.Flush();

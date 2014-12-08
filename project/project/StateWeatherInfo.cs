@@ -95,6 +95,11 @@ namespace project
         #endregion
 
 
+        public StateWeatherInfo()
+        {
+            SetDefaults();
+        }
+
         /// <summary>
         /// Fills in the structure of data from the file
         /// </summary>
@@ -228,21 +233,29 @@ namespace project
         }
 
 
-
-        //TODO
-        // insert into values
+        /// <summary>
+        /// Insert Header
+        /// </summary>
+        /// <param name="tableName">Table to load from</param>
+        /// <returns>Returns "INSERT INTO"</returns>
         public static string InsertHeader(string tableName)
         {
             StringBuilder sql = new StringBuilder();
-
+            sql.Append("INSERT INTO ");
+            sql.Append(tableName);
+            sql.Append(" (stateCode, data_year, data_month, PCP, CDD, HDD, TAVG, TMIN, TMAX) VALUES ");
             return sql.ToString();
         }
 
-        // ( data )
+        
+        /// <summary>
+        /// Insert all lines into the database
+        /// </summary>
+        /// <returns>Returns a list of data in ( )</returns>
         public string InsertLine ()
         {
             StringBuilder sql = new StringBuilder();
-
+            sql.AppendFormat("(\"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\", \"{5}\", \"{6}\", \"{7}\", \"{8}\")", stateCode, year, month, pcp, cdd, hdd, tavg, tmin, tmax);
             return sql.ToString();
         }
 

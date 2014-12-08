@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -79,8 +80,14 @@ namespace project
         }
 
 
-
-        //TODO
+        /// <summary>
+        /// Creates an insert string and sends
+        /// </summary>
+        /// <param name="UserName">User requesting insert</param>
+        /// <param name="TableName">Table to delete from and insert to</param>
+        /// <param name="dataPresent">Is data present before</param>
+        /// <param name="overwrite">Is data allowed to be overwritten</param>
+        /// <returns>True if successful</returns>
         public bool Insert(string UserName, string TableName, bool dataPresent, bool overwrite)
         {
             bool successfulInsert = true;
@@ -97,57 +104,31 @@ namespace project
 
             try
             {
-                #region first pass
+                DataTable table = new DataTable("weatherInfo");
+                table.Columns.Add("stateCode", typeof(int));
+                table.Columns.Add("data_year", typeof(Int16));
+                table.Columns.Add("data_month", typeof(byte));
+                table.Columns.Add("PCP", typeof(double));
+                table.Columns.Add("CDD", typeof(int));
+                table.Columns.Add("HDD", typeof(int));
+                table.Columns.Add("TAVG", typeof(double));
+                table.Columns.Add("TMIN", typeof(double));
+                table.Columns.Add("TMAX", typeof(double));
 
-                /*
-                //FIRSTPASS
-                // list of year months to be made
-                List<YearMonth> ToBeMade = new List<YearMonth>();
-
-                // find list of yearmonth's to be made
-                foreach (StateWeatherInfo current in info)
-                {
-                    // if current.YearMonth is not in DB
-                        // ToBeMade.add(current.YearMonth)
-                }
-
-                // insert yearmonths to be made
-                foreach (YearMonth current in ToBeMade)
-                {
-                    // insert current
-                }
-
-                // create insert statement
-                // string SQL = current.InsertHeader();
                 foreach(StateWeatherInfo current in info)
                 {
-                    //SQL += current.InsertLine();
+                    table.Rows.Add(current.StateCode, current.Year, current.Month, current.PCP, current.CDD, current.HDD, current.Tavg, current.Tmin, current.Tmax);
                 }
+                
 
-                // send SQL
-                */
-
-                #endregion
-
-                #region second pass
-
-                //SECONDPASS
-                // use DB generated state weather info?
-
-                // info query
-                    // var result = myList.GroupBy(test => test.id).Select(grp => grp.First()).ToList();
-                // database query for yearmonth
-
-                // insert previous join
-                // join info and data, select where not exist
-                    //infoQuery.RemoveAll(Item.YearMonth => databaseQuery.Contains(Item));
-                    //insert infoQuery.YearMonth
-
-                // insert info
-
-                #endregion
-
-                Logging.Log(UserName, iYear, iMonth, fYear, fMonth, initialTime, dataPresent, overwrite);
+                if (Database.Insert(UserName, TableName, table))
+                {
+                    Logging.Log(UserName, iYear, iMonth, fYear, fMonth, initialTime, dataPresent, overwrite);
+                }
+                else
+                {
+                    successfulInsert = false;
+                }
             }
             catch (Exception ex)
             {

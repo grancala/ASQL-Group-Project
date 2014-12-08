@@ -52,12 +52,12 @@ data_year yearType
 	NOT NULL,
 data_month monthType
 	NOT NULL,	 
-	PCP decimal,
+	PCP money,
 	CDD int,
 	HDD int,
-	TAVG decimal,
-	TMIN decimal,
-	TMAX decimal
+	TAVG money,
+	TMIN money,
+	TMAX money
 	
 	CONSTRAINT ID 
 	PRIMARY KEY (stateCode,data_year,data_month)
