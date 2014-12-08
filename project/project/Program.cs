@@ -15,6 +15,8 @@ namespace project
             string dataFile = string.Empty;
             string LogFile = string.Empty;
             string connectionString = string.Empty;
+            string UserName = "Demo";
+            string TableName = "Demo_12_21_2012";
 
             #region config file
 
@@ -42,14 +44,15 @@ namespace project
             {
                 // set log file and load data
                 Logging.FileName = LogFile;
-                //Database.ConnectionString = connectionString;
-                Database.ConnectionString = "Initial Catalog=ASQLGroup;User ID=dbAccessor;Password=wingding;Data Source=localhost";
+                Database.ConnectionString = connectionString;
+                //Database.ConnectionString = "Initial Catalog=ASQLGroup;User ID=dbAccessor;Password=wingding;Data Source=localhost";
+                
                 FileData file = new FileData();
-                bool success = file.Load("Current User", dataFile);
+                bool success = file.Load(UserName, dataFile);
                 if (success)
                 {
                     Console.WriteLine("Successful load");
-                    success = file.Insert("Demo", "Demo_12_21_2012", false, false);
+                    success = file.Insert(UserName, TableName, false, false);
                     if (success)
                     {
                         Console.WriteLine("Successful insert");

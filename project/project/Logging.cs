@@ -30,12 +30,12 @@ namespace project
         {
             StringBuilder builder = new StringBuilder();
 
+            builder.AppendLine("Database Insertion");
             builder.AppendLine("User: " + UserName);
             builder.AppendLine("Start time: " + GetTime(iTime));
             builder.AppendLine("End time: " + GetNow());
             builder.AppendLine("Start Range: " + iYear.ToString() + " " + iMonth.ToString());
             builder.AppendLine("End Range: " + fYear.ToString() + " " + fMonth.ToString());
-            builder.AppendLine();
 
             if(DataBefore)
             {
@@ -53,6 +53,8 @@ namespace project
             {
                 builder.AppendLine("Data was not present before loading attempt");
             }
+            builder.AppendLine();
+            builder.AppendLine();
 
             WriteFile(builder.ToString());
         }
@@ -70,8 +72,11 @@ namespace project
             builder.AppendLine("ERROR");
             builder.AppendLine("User: " + UserName);
             builder.AppendLine("Time: " + GetNow());
-            builder.AppendLine();
             builder.AppendLine(error);
+            builder.AppendLine();
+            builder.AppendLine();
+
+            WriteFile(builder.ToString());
         }
 
         
@@ -83,7 +88,6 @@ namespace project
         private static string GetTime(DateTime time)
         {
             return string.Format("{0:MM/dd/yy HH:mm:ss} UTC", time);
-
         }
 
 
