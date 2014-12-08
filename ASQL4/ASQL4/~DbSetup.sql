@@ -107,3 +107,31 @@ CREATE TABLE dbo.Users
 	CONSTRAINT PK_Users PRIMARY KEY (userID)
 );
 GO
+
+
+
+-- =============================================
+-- GraphTypes Table
+-- =============================================
+
+----If the table already exists delete it.--
+IF OBJECT_ID('dbo.GraphTypes') IS NOT NULL
+  DROP TABLE dbo.GraphTypes
+GO
+
+----Create the table--
+CREATE TABLE dbo.GraphTypes
+(
+	typeID int NOT NULL IDENTITY(1,1),
+	typeName nVarChar(50) NOT NULL UNIQUE,
+	CONSTRAINT PK_Users PRIMARY KEY (typeID)
+);
+GO
+
+----Populate the table--
+INSERT INTO dbo.GraphTypes VALUES ('Precipitation');
+INSERT INTO dbo.GraphTypes VALUES ('Cooling Days/Heating Days');
+INSERT INTO dbo.GraphTypes VALUES ('Temperature (Min/Max/Avg)');
+GO
+
+ 

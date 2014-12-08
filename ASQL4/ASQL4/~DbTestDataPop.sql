@@ -17,9 +17,9 @@ CREATE PROC #tempCreateTable
 		PCP decimal,
 		CDD int,
 		HDD int,
-		TAVG decimal,
-		TMIN decimal,
-		TMAX decimal
+		TAVG money,
+		TMIN money,
+		TMAX money
 
 		CONSTRAINT FK_' + @userTableName + '_stateCode FOREIGN KEY(stateCode)
 			REFERENCES RegionData(stateCode),
