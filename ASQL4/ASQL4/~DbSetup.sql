@@ -124,7 +124,7 @@ CREATE TABLE dbo.GraphTypes
 (
 	typeID int NOT NULL IDENTITY(1,1),
 	typeName nVarChar(50) NOT NULL UNIQUE,
-	CONSTRAINT PK_Users PRIMARY KEY (typeID)
+	CONSTRAINT PK_GraphTypes PRIMARY KEY (typeID)
 );
 GO
 
