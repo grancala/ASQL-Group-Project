@@ -6,13 +6,8 @@ USE ASQLGroup
 
 
 -- CREATE TABLE
-IF EXISTS (
-  SELECT * 
-    FROM INFORMATION_SCHEMA.ROUTINES 
-   WHERE SPECIFIC_SCHEMA = N'ASQLGroup'
-     AND SPECIFIC_NAME = N'CreateTable' 
-)
-   DROP PROCEDURE ASQLGroup.CreateTable
+IF OBJECT_ID('CreateTable', 'P') IS NOT NULL
+    DROP PROCEDURE CreateTable;
 GO
 
 CREATE PROCEDURE CreateTable
@@ -20,6 +15,7 @@ CREATE PROCEDURE CreateTable
 	@userPassword nVarChar(25),
 	@overWrite bit = 0,
 	@successful bit OUTPUT
+	WITH EXECUTE AS Owner
 AS
 	-- table naming username_YYYYMMDD
 	DECLARE @TableName nvarchar(50);
@@ -42,7 +38,9 @@ AS
 		IF @overWrite = 1
 		BEGIN
 			DECLARE @SQL VARCHAR(max) = 
-			'DROP TABLE ' + @TableName
+			'DROP TABLE ASQLGroup.dbo.' + @TableName
+			EXEC(@SQL);
+			SET @SQL = 'GRANT ALTER ON '+ @TableName + ' TO dbAccessor'
 			EXEC(@SQL);
 		END
 		ELSE
@@ -89,14 +87,10 @@ GO
 
 
 -- TABLE EXISTS
-IF EXISTS (
-  SELECT * 
-    FROM INFORMATION_SCHEMA.ROUTINES 
-   WHERE SPECIFIC_SCHEMA = N'ASQLGroup'
-     AND SPECIFIC_NAME = N'TableExists' 
-)
-   DROP PROCEDURE ASQLGroup.CreateTable
+IF OBJECT_ID('TableExists', 'P') IS NOT NULL
+    DROP PROCEDURE TableExists;
 GO
+
 
 CREATE PROCEDURE TableExists
 	@userName nVarChar(50),
@@ -118,7 +112,7 @@ AS
 		SET @dataCount = -1
 	END
 
-	IF @dataCount > 0
+	IF @dataCount = 0
 	BEGIN
 		DECLARE @Count int
 		DECLARE @sqlCommand nvarchar(1000)
@@ -144,58 +138,48 @@ GO
 
 
 -- CREATE USER
-IF EXISTS (
-  SELECT * 
-    FROM INFORMATION_SCHEMA.ROUTINES 
-   WHERE SPECIFIC_SCHEMA = N'ASQLGroup'
-     AND SPECIFIC_NAME = N'CreateUser' 
-)
-   DROP PROCEDURE ASQLGroup.CreateUser
+IF OBJECT_ID('CreateUser', 'P') IS NOT NULL
+    DROP PROCEDURE CreateUser;
 GO
 
 CREATE PROCEDURE CreateUser
-	@userName nVarChar(50)
+	@userName nVarChar(50),
+	@rowCount int output
 AS
 	INSERT INTO Users(userName,userPassword)
 		VALUES (@userName, 'Incorrect')
+	SET @rowCount = @@ROWCOUNT
 GO
 
 
 -- UPDATE USER
-IF EXISTS (
-  SELECT * 
-    FROM INFORMATION_SCHEMA.ROUTINES 
-   WHERE SPECIFIC_SCHEMA = N'ASQLGroup'
-     AND SPECIFIC_NAME = N'UpdateUser' 
-)
-   DROP PROCEDURE ASQLGroup.UpdateUser
+IF OBJECT_ID('UpdateUser', 'P') IS NOT NULL
+    DROP PROCEDURE UpdateUser;
 GO
 
 CREATE PROCEDURE UpdateUser
 	@userName nVarChar(50),
 	@oldPass varchar(25),
-	@newPass varchar(25)
+	@newPass varchar(25),
+	@rowCount int output
 AS
 	UPDATE Users
 		SET userPassword = @newPass
 		WHERE userName = @userName
 		AND	userPassword = @oldPass
+	SET @rowCount = @@ROWCOUNT
 GO
 
 
 -- DROP USER
-IF EXISTS (
-  SELECT * 
-    FROM INFORMATION_SCHEMA.ROUTINES 
-   WHERE SPECIFIC_SCHEMA = N'ASQLGroup'
-     AND SPECIFIC_NAME = N'DropUser' 
-)
-   DROP PROCEDURE ASQLGroup.DropUser
+IF OBJECT_ID('DropUser', 'P') IS NOT NULL
+    DROP PROCEDURE DropUser;
 GO
 
 CREATE PROCEDURE DropUser
 	@userName nVarChar(50),
-	@userPass nVarChar(25)
+	@userPass nVarChar(25),
+	@rowCount int output
 AS
 	DECLARE @TableName varChar(50)
 
@@ -214,16 +198,6 @@ AS
 	DELETE FROM Users
 		WHERE userName = @userName
 		AND userPassword = @userPass
+	SET @rowCount = @@ROWCOUNT
 GO
 
--- TESTING
-DECLARE @Success bit = 0
-DECLARE @Count int = 0
-
-EXECUTE CreateUser 'Nick' 
-EXECUTE UpdateUser 'Demo', 'Password', 'Incorrect'
-EXECUTE CreateTable 'Nick', 'Incorrect', 0, @Success OUTPUT
-EXECUTE TableExists 'Demo', 'Incorrect', @Count OUTPUT
-SELECT @Count
-EXECUTE CreateTable 'DEMO', 'Incorrect', 1, @Success OUTPUT
-EXECUTE DropUser 'Nick', 'Incorrect'

@@ -16,7 +16,7 @@ namespace project
             string LogFile = string.Empty;
             string connectionString = string.Empty;
             string UserName = "Demo";
-            string TableName = "Demo_12_21_2012";
+            string TableName = "Nick_20141209";
 
             #region config file
 
@@ -45,27 +45,51 @@ namespace project
                 // set log file and load data
                 Logging.FileName = LogFile;
                 Database.ConnectionString = connectionString;
-                //Database.ConnectionString = "Initial Catalog=ASQLGroup;User ID=dbAccessor;Password=wingding;Data Source=localhost";
-                
-                FileData file = new FileData();
-                bool success = file.Load(UserName, dataFile);
-                if (success)
+
+                // FROM EMPTY DB
+                string userName = "Nick";
+                string password = "Incorrect";
+                if (Database.CreateUser(userName))
                 {
-                    Console.WriteLine("Successful load");
-                    success = file.Insert(UserName, TableName, false, false);
-                    if (success)
+                    Console.WriteLine("Success creating user");
+                    if (Database.CreateTable(userName, password, true))
                     {
-                        Console.WriteLine("Successful insert");
+                        Console.WriteLine("Success creating table");
+                        FileData file = new FileData();
+                        bool success = file.Load(UserName, dataFile);
+                        if (success)
+                        {
+                            Console.WriteLine("Successful load");
+                            success = file.Insert(UserName, TableName, false, false);
+                            if (success)
+                            {
+                                Console.WriteLine("Successful insert");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Failure 4");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Failure 3");
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("Failure");
+                        Console.WriteLine("Failure 2");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Failure");
+                    Console.WriteLine("Failure 1");
                 }
+
+                
+            }
+            else
+            {
+                Console.WriteLine("Failed config");
             }
             Console.ReadKey(true);
             #endregion
