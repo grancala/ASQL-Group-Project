@@ -16,27 +16,38 @@ namespace project
         public static string ConnectionString = string.Empty;
 
         /// <summary>
-        /// Executes a non query on the database
+        /// Creates a user given a username
         /// </summary>
-        /// <param name="UserName">User requesting action</param>
-        /// <param name="sql">SQL to send</param>
-        /// <returns>True if successful</returns>
-        private static bool ExecuteNonQuery(string UserName, string sql)
+        /// <param name="UserName">Username</param>
+        /// <returns>True is successful</returns>
+        public static bool CreateUser(string UserName)
         {
-            bool successful = true;
+            bool results = false;
             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
             {
                 try
                 {
                     sqlConn.Open();
-                    // send sql
+
+                    // Perform a count on the table.
+                    SqlCommand command = new SqlCommand("CreateUser", sqlConn);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@userName", UserName);
+                    command.Parameters.Add("@rowCount", SqlDbType.Int);
+                    command.Parameters["@rowCount"].Direction = ParameterDirection.Output;
+                    command.ExecuteNonQuery();
+                    int count = (int)command.Parameters["@rowCount"].Value;
+                    if (count > 0)
+                    {
+                        results = true;
+                    }
                 }
                 catch (Exception e)
                 {
                     StringBuilder builder = new StringBuilder();
                     Helper.BuildErrorMessage(e, ref builder);
                     Logging.LogError(UserName, builder.ToString());
-                    successful = false;
+                    results = false;
                 }
                 finally
                 {
@@ -46,48 +57,163 @@ namespace project
                     }
                 }
             }
-            return successful;
+            return results;
+        }
+
+        /// <summary>
+        /// Updates a user's password
+        /// </summary>
+        /// <param name="UserName">User to update</param>
+        /// <param name="oldPass">Old password</param>
+        /// <param name="newPass">New password</param>
+        /// <returns>true if successful</returns>
+        public static bool UpdateUser (string UserName, string oldPass, string newPass)
+        {
+            bool results = false;
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    sqlConn.Open();
+
+                    // Perform a count on the table.
+                    SqlCommand command = new SqlCommand("UpdateUser", sqlConn);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@userName", UserName);
+                    command.Parameters.AddWithValue("@oldPass", oldPass);
+                    command.Parameters.AddWithValue("@newPass", newPass);
+                    command.Parameters.Add("@rowCount", SqlDbType.Int);
+                    command.Parameters["@rowCount"].Direction = ParameterDirection.Output;
+                    command.ExecuteNonQuery();
+                    int count = (int)command.Parameters["@rowCount"].Value;
+                    if (count > 0)
+                    {
+                        results = true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    StringBuilder builder = new StringBuilder();
+                    Helper.BuildErrorMessage(e, ref builder);
+                    Logging.LogError(UserName, builder.ToString());
+                    results = false;
+                }
+                finally
+                {
+                    if (sqlConn.State == ConnectionState.Open)
+                    {
+                        sqlConn.Close();
+                    }
+                }
+            }
+            return results;
+        }
+
+        /// <summary>
+        /// Removes a user given a username
+        /// </summary>
+        /// <param name="UserName">User to remove</param>
+        /// <param name="Password">Password to ensure user</param>
+        /// <returns>True if successful</returns>
+        public static bool DropUser(string UserName, string Password)
+        {
+            bool results = false;
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    sqlConn.Open();
+
+                    // Perform a count on the table.
+                    SqlCommand command = new SqlCommand("DropUser", sqlConn);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@userName", UserName);
+                    command.Parameters.AddWithValue("@userPass", Password);
+                    command.Parameters.Add("@rowCount", SqlDbType.Int);
+                    command.Parameters["@rowCount"].Direction = ParameterDirection.Output;
+                    command.ExecuteNonQuery();
+                    int count = (int)command.Parameters["@rowCount"].Value;
+                    if (count > 0)
+                    {
+                        results = true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    StringBuilder builder = new StringBuilder();
+                    Helper.BuildErrorMessage(e, ref builder);
+                    Logging.LogError(UserName, builder.ToString());
+                    results = false;
+                }
+                finally
+                {
+                    if (sqlConn.State == ConnectionState.Open)
+                    {
+                        sqlConn.Close();
+                    }
+                }
+            }
+            return results;
         }
 
 
         /// <summary>
         /// Creates a table using the standard structure
+        /// Calls stored proc CreateTable
         /// </summary>
         /// <param name="UserName">User requesting action</param>
-        /// <param name="TableName">Name for the new table</param>
+        /// <param name="password">User password</param>
+        /// <param name="overwrite">Is data allowed to be over written</param>
         /// <returns>True if successful</returns>
-        public static bool CreateTable (string UserName, string TableName)
+        public static bool CreateTable (string UserName, string password, bool overwrite)
         {
-            string sql = "CREATE TABLE " + TableName;
-            return ExecuteNonQuery(UserName, sql);
+            bool result = false;
+            // send SQL
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    sqlConn.Open();
+
+                    // Perform a count on the table.
+                    SqlCommand command = new SqlCommand("CreateTable", sqlConn);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@userName", UserName);
+                    command.Parameters.AddWithValue("@userPassword", password);
+                    command.Parameters.AddWithValue("@overWrite", overwrite);
+                    command.Parameters.Add("@successful", SqlDbType.Bit);
+                    command.Parameters["@successful"].Direction = ParameterDirection.Output;
+                    command.ExecuteNonQuery();
+                    result = (bool)command.Parameters["@successful"].Value;
+                }
+                catch (Exception e)
+                {
+                    StringBuilder builder = new StringBuilder();
+                    Helper.BuildErrorMessage(e, ref builder);
+                    Logging.LogError(UserName, builder.ToString());
+                    result = false;
+                }
+                finally
+                {
+                    if (sqlConn.State == ConnectionState.Open)
+                    {
+                        sqlConn.Close();
+                    }
+                }
+            }
+            return result;
         }
-
-
-        /// <summary>
-        /// Drops the table in the database
-        /// </summary>
-        /// <param name="UserName">User requesting action</param>
-        /// <param name="TableName">Table to drop</param>
-        /// <returns>True if successful</returns>
-        public static bool DropTable (string UserName, string TableName)
-        {
-            string sql = "DROP TABLE " + TableName + ";";
-            return ExecuteNonQuery(UserName, sql);
-        }
-
 
         /// <summary>
         /// Determines if the table has data or not
+        /// Calls stored proc TableExists
         /// </summary>
         /// <param name="UserName">User requesting action</param>
-        /// <param name="TableName">Table to check</param>
+        /// <param name="password">Users password</param>
         /// <returns>True if data is there</returns>
-        public static bool TableHasContents (string UserName, string TableName)
+        public static long TableHasContents (string UserName, string password)
         {
-            bool contents = true;
             long count = 0;
-
-            string SQL = "SELECT COUNT(*) FROM " + TableName + ";";
 
             // send SQL
             using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
@@ -97,15 +223,21 @@ namespace project
                     sqlConn.Open();
 
                     // Perform a count on the table.
-                    SqlCommand commandRowCount = new SqlCommand(SQL, sqlConn);
-                    count = System.Convert.ToInt32(commandRowCount.ExecuteScalar());
+                    SqlCommand commandRowCount = new SqlCommand("TableExists", sqlConn);
+                    commandRowCount.CommandType = CommandType.StoredProcedure;
+                    commandRowCount.Parameters.AddWithValue("@userName", UserName);
+                    commandRowCount.Parameters.AddWithValue("@userPassword", password);
+                    commandRowCount.Parameters.Add("@dataCount", SqlDbType.BigInt);
+                    commandRowCount.Parameters["@dataCount"].Direction = ParameterDirection.Output;
+                    commandRowCount.ExecuteNonQuery();
+                    count = (long)commandRowCount.Parameters["@dataCount"].Value;
                 }
                 catch (Exception e)
                 {
                     StringBuilder builder = new StringBuilder();
                     Helper.BuildErrorMessage(e, ref builder);
                     Logging.LogError(UserName, builder.ToString());
-                    contents = false;
+                    count = -1;
                 }
                 finally
                 {
@@ -115,14 +247,8 @@ namespace project
                     }
                 }
             }
-            
-            if (count == 0)
-            {
-                contents = false;
-            }
-            return contents;
+            return count;
         }
-
 
         /// <summary>
         /// Truncates the specified table and copies the data from the insert
@@ -145,7 +271,7 @@ namespace project
                     trans = sqlConn.BeginTransaction();
                     SqlCommand command;
 
-                    string deleteSQL = "TRUNCATE TABLE " + table + ";";
+                    string deleteSQL = "DELETE FROM " + table + ";";
                     command = new SqlCommand(deleteSQL, sqlConn, trans);
                     command.ExecuteNonQuery();
 
