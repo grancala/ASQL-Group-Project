@@ -76,7 +76,7 @@ GO
 
 ----Populate the table--
 --&Variables&--
-DECLARE @regionsCsvPath VARCHAR(50) = 'C:\Users\Jim\Desktop\ASQL4\ASQL4\Regions.csv'
+DECLARE @regionsCsvPath VARCHAR(100) = 'C:\Users\Nick\Documents\GitHub\ASQL-Group-Project\ASQL4\ASQL4\Regions.csv'
 DECLARE @csvDelimiter varchar(5) = ','
 DECLARE @csvEndOfRow varchar(5) = '\n'
 
@@ -100,7 +100,7 @@ GO
 ----Create the table--
 CREATE TABLE dbo.Users
 (
-	userID int NOT NULL,
+	userID int NOT NULL IDENTITY(1,1),
 	userName nVarChar(50) NOT NULL UNIQUE,
 	userPassword nVarChar(25),
 	userDatabase nVarChar(50),
