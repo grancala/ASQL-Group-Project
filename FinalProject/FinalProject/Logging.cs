@@ -107,11 +107,12 @@ namespace FinalProject
         /// <param name="toLog">Data to log</param>
         private static void WriteFile(string toLog)
         {
-            using (StreamWriter writer = new StreamWriter(FileName, true))
-            {
-                writer.Write(toLog);
-                writer.Flush();
-            }
+            toLog = toLog;
+            //using (StreamWriter writer = new StreamWriter(FileName, true))
+            //{
+            //    writer.Write(toLog);
+            //    writer.Flush();
+            //}
         }
     }
 }

@@ -10,7 +10,8 @@
 <body>
     <form id="mainForm" runat="server">
     <div>
-        <asp:Label ID="mainformlabel" runat="server" Text="Main Page" />
+        <asp:Label ID="mainformlabel" runat="server" Text="Main Page" /><br />
+        <asp:Label ID="LoggedInAs" runat="server" /><br />
         <br /><br />
         <asp:Button ID="login" runat="server" OnClick="login_Click" Text="Login" />
         <br />

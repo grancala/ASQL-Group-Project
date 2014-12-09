@@ -10,25 +10,16 @@
 namespace FinalProject {
     
     
-    public partial class Main {
+    public partial class UpLoad {
         
         /// <summary>
-        /// mainForm control.
+        /// uploadForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm mainForm;
-        
-        /// <summary>
-        /// mainformlabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label mainformlabel;
+        protected global::System.Web.UI.HtmlControls.HtmlForm uploadForm;
         
         /// <summary>
         /// LoggedInAs control.
@@ -40,48 +31,57 @@ namespace FinalProject {
         protected global::System.Web.UI.WebControls.Label LoggedInAs;
         
         /// <summary>
-        /// login control.
+        /// Contents control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button login;
+        protected global::System.Web.UI.WebControls.Label Contents;
         
         /// <summary>
-        /// manage control.
+        /// OverWrite control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button manage;
+        protected global::System.Web.UI.WebControls.CheckBox OverWrite;
         
         /// <summary>
-        /// upload control.
+        /// filelabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button upload;
+        protected global::System.Web.UI.WebControls.Label filelabel;
         
         /// <summary>
-        /// visualize control.
+        /// fileUploader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button visualize;
+        protected global::System.Web.UI.WebControls.FileUpload fileUploader;
         
         /// <summary>
-        /// Error control.
+        /// btnUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Error;
+        protected global::System.Web.UI.WebControls.Button btnUpload;
+        
+        /// <summary>
+        /// status control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label status;
     }
 }

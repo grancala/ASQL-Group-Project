@@ -40,8 +40,6 @@ AS
 			DECLARE @SQL VARCHAR(max) = 
 			'DROP TABLE ASQLGroup.dbo.' + @TableName
 			EXEC(@SQL);
-			SET @SQL = 'GRANT ALTER ON '+ @TableName + ' TO dbAccessor'
-			EXEC(@SQL);
 		END
 		ELSE
 		BEGIN

@@ -11,6 +11,9 @@ namespace FinalProject
     /// </summary>
     public static class LoadConfig
     {
+        static string filename = @"C:\Users\Nick\Desktop\ASQL\FinalProject\FinalProject\config.ini";
+
+
         /// <summary>
         /// Loads from config.ini
         /// </summary>
@@ -27,7 +30,7 @@ namespace FinalProject
                 // need to load data
                 try
                 {
-                    ConfigFile config = new ConfigFile(@"C:\Users\Nick\Desktop\ASQL\FinalProject\FinalProject\config.ini");
+                    ConfigFile config = new ConfigFile(filename);
                     Database.ConnectionString = config.getValue("connectionString");
                     Logging.FileName = config.getValue("LogFile");
                     loaded = 1;

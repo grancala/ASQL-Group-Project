@@ -11,8 +11,9 @@ namespace FinalProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            #region common
             // get config
-            switch(LoadConfig.Load())
+            switch (LoadConfig.Load())
             {
                 case -1:
                     Error.Text = "Failed Loading Config";
@@ -36,11 +37,14 @@ namespace FinalProject
             {
                 password = (string)Session["password"];
             }
-            if (username == "" || password=="")
+            if (username == "" || password == "")
             {
                 // not logged in
                 Server.Transfer("Login.aspx", true);
             }
+            LoggedInAs.Text = "WELCOME: " + username;
+            
+            #endregion
         }
 
 
@@ -58,7 +62,7 @@ namespace FinalProject
 
         protected void upload_Click(object sender, EventArgs e)
         {
-
+            Server.Transfer("UpLoad.aspx", true);
         }
 
 
