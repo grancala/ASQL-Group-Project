@@ -14,7 +14,7 @@ CREATE PROC #tempCreateTable
 		stateCode int NOT NULL,
 		data_year yearType NOT NULL,
 		data_month monthType NOT NULL,	 
-		PCP decimal,
+		PCP money,
 		CDD int,
 		HDD int,
 		TAVG money,

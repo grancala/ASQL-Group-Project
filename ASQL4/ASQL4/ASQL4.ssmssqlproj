@@ -37,11 +37,11 @@
           <AssociatedConnUserName />
           <FullPath>JimsJungle.sql</FullPath>
         </FileNode>
-        <FileNode Name="SQLQuery2.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:JIMS_LAPTOP:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>JIMS_LAPTOP</AssociatedConnSrvName>
+        <FileNode Name="TestingQuery.SQL">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
           <AssociatedConnUserName />
-          <FullPath>SQLQuery2.sql</FullPath>
+          <FullPath>TestingQuery.SQL</FullPath>
         </FileNode>
       </Items>
     </LogicalFolder>
