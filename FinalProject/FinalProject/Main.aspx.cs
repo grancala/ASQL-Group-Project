@@ -13,7 +13,7 @@ namespace FinalProject
         {
             #region common
             // get config
-            switch (LoadConfig.Load())
+            switch (LoadConfig.Load(Server.MapPath("~/")))
             {
                 case -1:
                     Error.Text = "Failed Loading Config";
@@ -68,7 +68,7 @@ namespace FinalProject
 
         protected void visualize_Click(object sender, EventArgs e)
         {
-
+            // Server.Transfer("Graph.aspx",true);
         }
     }
 }

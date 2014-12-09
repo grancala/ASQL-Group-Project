@@ -12,7 +12,7 @@ namespace FinalProject
         protected void Page_Load(object sender, EventArgs e)
         {
             // get config
-            switch (LoadConfig.Load())
+            switch (LoadConfig.Load(Server.MapPath("~/")))
             {
                 case -1:
                     Error.Text = "Failed Loading Config";

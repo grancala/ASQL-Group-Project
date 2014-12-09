@@ -11,14 +11,14 @@ namespace FinalProject
     /// </summary>
     public static class LoadConfig
     {
-        static string filename = @"C:\Users\Nick\Desktop\ASQL\FinalProject\FinalProject\config.ini";
+        static string filename = @"config.ini";
 
 
         /// <summary>
         /// Loads from config.ini
         /// </summary>
         /// <returns>True if data loaded</returns>
-        public static int Load ()
+        public static int Load (string serverPath)
         {
             //TODO remove
             Database.ConnectionString = string.Empty;
@@ -30,9 +30,9 @@ namespace FinalProject
                 // need to load data
                 try
                 {
-                    ConfigFile config = new ConfigFile(filename);
+                    ConfigFile config = new ConfigFile(serverPath + filename);
                     Database.ConnectionString = config.getValue("connectionString");
-                    Logging.FileName = config.getValue("LogFile");
+                    Logging.FileName = serverPath + config.getValue("LogFile");
                     loaded = 1;
                 }
                 catch(Exception e)

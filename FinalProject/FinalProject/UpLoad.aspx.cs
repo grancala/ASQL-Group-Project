@@ -19,7 +19,7 @@ namespace FinalProject
         {
             #region common
             // get config
-            switch (LoadConfig.Load())
+            switch (LoadConfig.Load(Server.MapPath("~/")))
             {
                 case -1:
                     status.Text = "Failed Loading Config";
@@ -75,10 +75,12 @@ namespace FinalProject
                 if (amountOfContents >= 0)
                 {
                     OverWrite.Enabled = true;
+                    tablePresent = true;
                 }
                 else
                 {
                     OverWrite.Enabled = false;
+                    tablePresent = false;
                 }
             }
             else
@@ -153,6 +155,16 @@ namespace FinalProject
                     status.Text = "Failed uploading file, see log for details";
                 }
             }
+        }
+
+        protected void BackToMain_Click(object sender, EventArgs e)
+        {
+            Server.Transfer("Main.aspx", true);
+        }
+
+        protected void visualization_Click(object sender, EventArgs e)
+        {
+            // Server.Transfer("Graph.aspx",true);
         }
     }
 }

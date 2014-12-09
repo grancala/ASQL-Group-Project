@@ -23,6 +23,10 @@
         </div>
         <br /><br />
         <asp:Label id="status" runat="server" />
+        <br />
+        <asp:Button ID="BackToMain" runat="server" OnClick="BackToMain_Click" Text="Back To Main Page" />
+        <br />
+        <asp:Button ID="visualization" runat="server" OnClick="visualization_Click" Text="Visualize Data" />
     </div>
     </form>
 </body>
