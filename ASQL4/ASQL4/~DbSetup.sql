@@ -76,14 +76,14 @@ GO
 
 ----Populate the table--
 --&Variables&--
-DECLARE @regionsCsvPath VARCHAR(50) = 'C:\Users\Jim\Desktop\ASQL4\ASQL4\Regions.csv'
+DECLARE @regionsCsvPath VARCHAR(100) = 'C:\Users\Jim\Documents\GitHub\ASQL-Group-Project\ASQL4\ASQL4\Regions.csv'
 DECLARE @csvDelimiter varchar(5) = ','
 DECLARE @csvEndOfRow varchar(5) = '\n'
 
 --Code--
 DECLARE @sql_bulk VARCHAR(max) = 'BULK INSERT dbo.RegionData
 FROM ''' + @regionsCsvPath + '''
-WITH ( FIELDTERMINATOR = ''' + @csvDelimiter + ''', ROWTERMINATOR = ''' + @csvEndOfRow + ''')'
+WITH ( FIELDTERMINATOR = ''' + @csvDelimiter + ''', ROWTERMINATOR = ''' + @csvEndOfRow + ''')';
 EXEC(@sql_bulk)
 GO 
 

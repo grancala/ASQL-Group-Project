@@ -31,7 +31,7 @@ CREATE PROC #tempCreateTable
 
 CREATE PROC #tempPopulateTable 
 	@userTableName varchar(50),
-	@userCsvPath varchar(50)
+	@userCsvPath varchar(100)
 
 	AS
 	DECLARE @sql_bulk VARCHAR(max) = 'BULK INSERT dbo.' + @userTableName +
@@ -51,7 +51,7 @@ GO
 
 CREATE PROCEDURE #tempAddPackage
 	@userTableName varchar(50),
-	@userCsvPath varchar(50),
+	@userCsvPath varchar(500),
 	@userID int,
 	@userName nVarChar(50),
 	@userPassword nVarChar(25)
@@ -68,7 +68,7 @@ GO
 
 EXEC #tempAddPackage
 	@userTableName = 'Demo_2_12_2014',
-	@userCsvPath = 'C:\Users\Jim\Desktop\ASQL4\ASQL4\DemoDBValues.csv',
+	@userCsvPath = 'C:\Users\Jim\Documents\GitHub\ASQL-Group-Project\ASQL4\ASQL4\DemoDBValues.csv',
 	@userID = '1',
 	@userName = 'Demo',
 	@userPassword = 'Password';
