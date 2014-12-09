@@ -16,6 +16,54 @@ namespace project
         public static string ConnectionString = string.Empty;
 
         /// <summary>
+        /// Attempts to log in a user
+        /// </summary>
+        /// <param name="UserName">User to log in</param>
+        /// <param name="Password">Password to log in with</param>
+        /// <returns>True if logged in</returns>
+        public static bool LoginUser(string UserName, string Password)
+        {
+            bool results = false;
+            int temp = 0;
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    sqlConn.Open();
+
+                    // Perform a count on the table.
+                    SqlCommand command = new SqlCommand("verifyUser", sqlConn);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@userName", UserName);
+                    command.Parameters.AddWithValue("@password", Password);
+                    command.Parameters.Add("@return", SqlDbType.Int);
+                    command.Parameters["@return"].Direction = ParameterDirection.ReturnValue;
+                    command.ExecuteNonQuery();
+                    temp = (int)command.Parameters["@return"].Value;
+                    if(temp == 0)
+                    {
+                        results = true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    StringBuilder builder = new StringBuilder();
+                    Helper.BuildErrorMessage(e, ref builder);
+                    Logging.LogError(UserName, builder.ToString());
+                    results = false;
+                }
+                finally
+                {
+                    if (sqlConn.State == ConnectionState.Open)
+                    {
+                        sqlConn.Close();
+                    }
+                }
+            }
+            return results;
+        }
+
+        /// <summary>
         /// Creates a user given a username
         /// </summary>
         /// <param name="UserName">Username</param>
@@ -165,7 +213,7 @@ namespace project
         /// <param name="password">User password</param>
         /// <param name="overwrite">Is data allowed to be over written</param>
         /// <returns>True if successful</returns>
-        public static bool CreateTable (string UserName, string password, bool overwrite)
+        public static bool CreateTable(string UserName, string password, bool overwrite)
         {
             bool result = false;
             // send SQL
@@ -202,6 +250,59 @@ namespace project
                 }
             }
             return result;
+        }
+
+        /// <summary>
+        /// Gets a users table name
+        /// </summary>
+        /// <param name="UserName">User requesting tablename</param>
+        /// <param name="Password">User's password</param>
+        /// <param name="tableName">Where the user's table name is</param>
+        /// <returns>True if results were found</returns>
+        public static bool GetTableName (string UserName, string Password, out string tableName)
+        {
+            bool results = false;
+            tableName = "";
+            int temp = 0;
+            using (SqlConnection sqlConn = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    sqlConn.Open();
+
+                    // Perform a count on the table.
+                    SqlCommand command = new SqlCommand("getDBName", sqlConn);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@userName", UserName);
+                    command.Parameters.AddWithValue("@password", Password);
+                    command.Parameters.Add("@userTable", SqlDbType.VarChar, 100);
+                    command.Parameters["@userTable"].Direction = ParameterDirection.Output;
+                    command.Parameters.Add("@return", SqlDbType.Int);
+                    command.Parameters["@return"].Direction = ParameterDirection.ReturnValue;
+                    command.ExecuteNonQuery();
+                    temp = (int)command.Parameters["@return"].Value;
+                    if (temp == 0)
+                    {
+                        results = true;
+                        tableName = (string)command.Parameters["@userTable"].Value;
+                    }
+                }
+                catch (Exception e)
+                {
+                    StringBuilder builder = new StringBuilder();
+                    Helper.BuildErrorMessage(e, ref builder);
+                    Logging.LogError(UserName, builder.ToString());
+                    results = false;
+                }
+                finally
+                {
+                    if (sqlConn.State == ConnectionState.Open)
+                    {
+                        sqlConn.Close();
+                    }
+                }
+            }
+            return results;
         }
 
         /// <summary>
