@@ -57,6 +57,8 @@
 </head>
 <body>
     <form id="chartingForm" runat="server">
+        <input id="btnprint" type="button" onclick="PrintDiv()" value="Print" />
+        <asp:Button ID="BackToMain" runat="server" OnClick="BackToMain_Click" text="Back To Main" />
          Select ChartType:       
         <asp:DropDownList ID="ChartType" runat="server" AutoPostBack="true" OnSelectedIndexChanged="SelectedIndexChanged" >
             <asp:ListItem Selected="True" Value="1">Precipitation</asp:ListItem>
@@ -72,7 +74,6 @@
             <asp:ListItem Selected="True" Value="2">Quarterly</asp:ListItem>
             <asp:ListItem Value="3">Annually</asp:ListItem>
          </asp:RadioButtonList>
-        <input id="btnprint" type="button" onclick="PrintDiv()" value="Print" />
 
         <div id ="dashboard_div" >
             <div id ="chart_div" style="width: 700px; height: 300px;"" ></div>

@@ -48,12 +48,6 @@ namespace FinalProject
         }
 
 
-        protected void login_Click(object sender, EventArgs e)
-        {
-            Server.Transfer("Login.aspx", true);
-        }
-
-
         protected void manage_Click(object sender, EventArgs e)
         {
             Server.Transfer("ManageUsers.aspx", true);

@@ -21,8 +21,8 @@
             <br />
             <asp:Button ID="btnUpload" Text="Upload Now" runat="server" OnClick="Upload_Click" />
         </div>
-        <br /><br />
         <asp:Label id="status" runat="server" />
+        <br /><br />
         <br />
         <asp:Button ID="BackToMain" runat="server" OnClick="BackToMain_Click" Text="Back To Main Page" />
         <br />

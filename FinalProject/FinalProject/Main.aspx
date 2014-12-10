@@ -13,8 +13,6 @@
         <asp:Label ID="mainformlabel" runat="server" Text="Main Page" /><br />
         <asp:Label ID="LoggedInAs" runat="server" /><br />
         <br /><br />
-        <asp:Button ID="login" runat="server" OnClick="login_Click" Text="Login" />
-        <br />
         <asp:Button ID="manage" runat="server" OnClick="manage_Click" Text="Manage Users" />
         <br />
         <asp:Button ID="upload" runat="server" OnClick="upload_Click" Text="Upload Data" />

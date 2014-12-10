@@ -304,5 +304,11 @@ namespace FinalProject
 
             return formatted;
         }
+
+
+        protected void BackToMain_Click(object sender, EventArgs e)
+        {
+            Server.Transfer("Main.aspx");
+        }
     }
 }

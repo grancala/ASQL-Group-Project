@@ -24,10 +24,10 @@
             <asp:TextBox ID="txtUserUpdate" runat="server" />
             <br />
             <asp:Label ID="oldupdatelabel" runat="server">Old Password</asp:Label>
-            <asp:TextBox ID="txtOldUpdate" runat="server" />
+            <asp:TextBox ID="txtOldUpdate" TextMode="Password" runat="server" />
             <br />
             <asp:Label ID="newupdatelabel" runat="server">New Password</asp:Label>
-            <asp:TextBox ID="txtNewUpdate" runat="server" />
+            <asp:TextBox ID="txtNewUpdate" TextMode="Password" runat="server" />
             <br />
             <asp:Button ID="Update" runat="server" OnClick="Update_Click" Text="UPDATE" />
         </div>
@@ -39,7 +39,7 @@
             <asp:TextBox ID="txtUserRem" runat="server" />
             <br />
             <asp:Label ID="passremovellabel" runat="server">Password</asp:Label>
-            <asp:TextBox ID="txtPassRem" runat="server" />
+            <asp:TextBox ID="txtPassRem" TextMode="Password" runat="server" />
             <br />
             <asp:Button ID="Remove" runat="server" OnClick="Remove_Click" Text="REMOVE" />
 
