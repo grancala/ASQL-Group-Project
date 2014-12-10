@@ -11,12 +11,16 @@ namespace Asql
 {
     public partial class Charting : System.Web.UI.Page
     {
+        string username = "Nick";
+        string password = "Incorrect";
+
         string DatabaseConnectionString =  Properties.Resources.dbConnectionString;
         string SQLQUERY = "SELECT top 1000 stateCode,data_year,data_month,PCP " +
                         "FROM [ASQLGroup].[dbo].[Demo_2_12_2014] " +
                         "WHERE (stateCode='101') " +
                         "AND ( data_year BETWEEN 2001 AND 2013) ";
                         //"Go";        //populate using Data Provided by Jim Change this later
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             var googleDataTable = new Bortosky.Google.Visualization.GoogleDataTable(this.ProgrammingTable); //construct a datatable from a google table
@@ -27,6 +31,7 @@ namespace Asql
                 PopulateRegionDropDown();
             };
         }
+        
         //A single Table that contains data displayed by the chart
         protected System.Data.DataTable ProgrammingTable
         {
@@ -65,5 +70,27 @@ namespace Asql
             }
             //fill dropDown
         }
+
+        protected void RegionLookup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Period_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ChartType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void JimsButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }
