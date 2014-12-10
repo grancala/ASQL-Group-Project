@@ -130,9 +130,10 @@ CREATE TABLE dbo.GraphTypes
 GO
 
 ----Populate the table--
-INSERT INTO dbo.GraphTypes VALUES ('Precipitation');
-INSERT INTO dbo.GraphTypes VALUES ('Cooling Days/Heating Days');
-INSERT INTO dbo.GraphTypes VALUES ('Temperature (Min/Max/Avg)');
+INSERT INTO dbo.GraphTypes VALUES 
+	('Precipitation'),
+	('Cooling Days/Heating Days'),
+	('Temperature (Min/Max/Avg)');
 GO
 
  
