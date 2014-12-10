@@ -63,8 +63,8 @@ AS
 			FROM ' + @dbName + ' 
 			
 			 WHERE stateCode = ' + CONVERT(varChar(10),@stateCodeIn)  + 
-			' AND DATEADD(YEAR, data_year-1900, DATEADD(MM, data_month, -1)) > ''' +CONVERT(varChar(10), @dateInfo) +
-			''' AND DATEADD(YEAR, data_year-1900, DATEADD(MM, data_month, -1)) < ''' + CONVERT(varChar(10), @dateInfoEnd) + 
+			' AND DATEADD(YEAR, data_year-1900, DATEADD(MM, data_month, -1)) >= ''' +CONVERT(varChar(10), @dateInfo) +
+			''' AND DATEADD(YEAR, data_year-1900, DATEADD(MM, data_month, -1)) <= ''' + CONVERT(varChar(10), @dateInfoEnd) + 
 			'''	GROUP BY
 			data_year,
 			data_month
@@ -96,8 +96,8 @@ AS
 			FROM ' + @dbName + ' 
 			
 			 WHERE stateCode = ' + CONVERT(varChar(10),@stateCodeIn)  + 
-			' AND DATEADD(YEAR, data_year-1900, DATEADD(MM, data_month, -1)) > ''' +CONVERT(varChar(10), @dateInfo) +
-			''' AND DATEADD(YEAR, data_year-1900, DATEADD(MM, data_month, -1)) < ''' + CONVERT(varChar(10), @dateInfoEnd) + 
+			' AND DATEADD(YEAR, data_year-1900, DATEADD(MM, data_month, -1)) >= ''' +CONVERT(varChar(10), @dateInfo) +
+			''' AND DATEADD(YEAR, data_year-1900, DATEADD(MM, data_month, -1)) <= ''' + CONVERT(varChar(10), @dateInfoEnd) + 
 			'''	GROUP BY
 			data_year,
 			data_month
@@ -135,8 +135,54 @@ AS
 			FROM ' + @dbName + ' 
 			
 			 WHERE stateCode = ' + CONVERT(varChar(10),@stateCodeIn)  + 
-			' AND DATEADD(YEAR, data_year-1900, DATEADD(MM, data_month, -1)) > ''' +CONVERT(varChar(10), @dateInfo) +
-			''' AND DATEADD(YEAR, data_year-1900, DATEADD(MM, data_month, -1)) < ''' + CONVERT(varChar(10), @dateInfoEnd) + 
+			' AND DATEADD(YEAR, data_year-1900, DATEADD(MM, data_month, -1)) >= ''' +CONVERT(varChar(10), @dateInfo) +
+			''' AND DATEADD(YEAR, data_year-1900, DATEADD(MM, data_month, -1)) <= ''' + CONVERT(varChar(10), @dateInfoEnd) + 
+			'''	GROUP BY
+			data_year,
+			CASE
+			    WHEN data_month IN (1, 2, 3) THEN 1
+			    WHEN data_month IN (4, 5, 6) THEN 2
+			    WHEN data_month IN (7, 8, 9) THEN 3
+			    ELSE 4
+			END
+		ORDER BY
+		    [Year],
+		    [Quarter]
+		;'
+
+	EXEC(@bigSQL)
+GO
+
+IF OBJECT_ID('SearchQuarterlyTemperature', 'P') IS NOT NULL
+    DROP PROCEDURE SearchQuarterlyTemperature;
+GO
+
+CREATE PROCEDURE SearchQuarterlyTemperature(
+    @stateCodeIn int,
+    @dbName nVarChar(50),
+    @TheStart Date,
+    @TheEnd Date)
+AS
+	DECLARE @dateInfo date = DATEADD(YEAR, DATEPART(YEAR, @TheStart) - 1900, DATEADD(qq,  DATEPART(QUARTER, @TheStart) - 1, -1));
+	DECLARE @dateInfoEnd date = DATEADD(YEAR, DATEPART(YEAR, @TheEnd) - 1900, DATEADD(qq,  DATEPART(QUARTER, @TheEnd), -1));
+
+	DECLARE @bigSQL varChar(max) = 
+		'SELECT data_year as [Year],
+		CASE
+			WHEN data_month IN (1, 2, 3) THEN 1
+			WHEN data_month IN (4, 5, 6) THEN 2
+			WHEN data_month IN (7, 8, 9) THEN 3
+			ELSE 4
+			END As [Quarter],
+			MAX(TMAX) AS TMAX,
+			MIN(TMIN) AS TMIN,
+			AVG(TAVG) AS TAVG
+
+			FROM ' + @dbName + ' 
+			
+			 WHERE stateCode = ' + CONVERT(varChar(10),@stateCodeIn)  + 
+			' AND DATEADD(YEAR, data_year-1900, DATEADD(MM, data_month, -1)) >= ''' +CONVERT(varChar(10), @dateInfo) +
+			''' AND DATEADD(YEAR, data_year-1900, DATEADD(MM, data_month, -1)) <= ''' + CONVERT(varChar(10), @dateInfoEnd) + 
 			'''	GROUP BY
 			data_year,
 			CASE
@@ -155,11 +201,14 @@ GO
 
 
 
+/*
 
-
-
-
-
+TMax = Max for period
+TMin = Min for period
+TAvg = Take the average of the averages for the period
+CDD/HDD = Take the average of the period
+Precipitation = Take the average of the period
+*/
 
 
 IF OBJECT_ID('testMonthlyPCP', 'P') IS NOT NULL
@@ -183,7 +232,7 @@ EXEC	@return_value = getDBName
 		@userTable = @userTable OUTPUT
 
 
-EXEC SearchQuarterlyCDD_HDD
+EXEC SearchQuarterlyTemperature
 	 @stateCodeIn  = 101,
     @dbName = @userTable,
     @TheStart = @start,

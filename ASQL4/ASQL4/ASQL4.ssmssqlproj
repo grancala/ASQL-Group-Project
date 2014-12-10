@@ -31,11 +31,23 @@
           <AssociatedConnUserName />
           <FullPath>~DbTestDataPop.sql</FullPath>
         </FileNode>
+        <FileNode Name="GenericSearchProc.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:JIMS_LAPTOP:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>JIMS_LAPTOP</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>GenericSearchProc.sql</FullPath>
+        </FileNode>
         <FileNode Name="JimsJungle.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:JIMS_LAPTOP:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>JIMS_LAPTOP</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>JimsJungle.sql</FullPath>
+        </FileNode>
+        <FileNode Name="NicksNutHouse.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:JIMS_LAPTOP:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>JIMS_LAPTOP</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>NicksNutHouse.sql</FullPath>
         </FileNode>
         <FileNode Name="SearchQueries.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:JIMS_LAPTOP:True</AssociatedConnectionMoniker>
