@@ -26,10 +26,10 @@ AS
 			' AND DATEADD(YEAR, data_year-1900, -1) >= ''' +CONVERT(varChar(10), @dateInfo) +
 			''' AND DATEADD(YEAR, data_year-1900, -1) <= ''' + CONVERT(varChar(10), @dateInfoEnd) + 
 			'''	GROUP BY
-			data_year,
-			data_month
+			data_year
 		ORDER BY
 		    [Year]
+
 		;'
 
 	EXEC(@bigSQL)
@@ -154,9 +154,9 @@ AS
 		BEGIN	
 		Declare @ReturnColumns nVarChar(100) = 
 			CASE @searchType
-				WHEN 2 THEN ',	SUM(CDD) AS CDD, SUM(HDD) AS HDD '
+				WHEN 2 THEN ',	AVG(CDD) AS CDD, AVG(HDD) AS HDD '
 				WHEN 3 THEN ',	MAX(TMAX) AS TMAX, MIN(TMIN) AS TMIN, AVG(TAVG) AS TAVG '
-				ELSE ', SUM(PCP) AS PCP '
+				ELSE ', AVG(PCP) AS PCP '
 			END
 		IF @timeIncrement = 1
 			BEGIN
