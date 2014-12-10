@@ -11,13 +11,12 @@ namespace Asql
 {
     public partial class Charting : System.Web.UI.Page
     {
-        string DatabaseConnectionString = "Server=myServerAddress;Database=myDataBase;User Id=myUsername;";
-        string SQLQUERY = "SELECT top 1000 stateCode,data_year,data_month,PCP" +
-                        "FROM [ASQLGroup].[dbo].[Demo_12_21_2012]" +
-                        "WHERE (stateCode='101')" +
-                        "AND ( data_year BETWEEN 2001 AND 2013)"+
-                        "Go;";
-        //populate using Data Provided by Jim Change this later
+        string DatabaseConnectionString =  Properties.Resources.dbConnectionString;
+        string SQLQUERY = "SELECT top 1000 stateCode,data_year,data_month,PCP " +
+                        "FROM [ASQLGroup].[dbo].[Demo_2_12_2014] " +
+                        "WHERE (stateCode='101') " +
+                        "AND ( data_year BETWEEN 2001 AND 2013) ";
+                        //"Go";        //populate using Data Provided by Jim Change this later
         protected void Page_Load(object sender, EventArgs e)
         {
             var googleDataTable = new Bortosky.Google.Visualization.GoogleDataTable(this.ProgrammingTable); //construct a datatable from a google table
@@ -49,9 +48,8 @@ namespace Asql
             //run sql script to get table
             using (SqlConnection conn = new SqlConnection(DatabaseConnectionString))
             {
-                string Query = "SELECT DISTINCT stateCode" +
-                "FROM [ASQLGroup].[dbo].[Demo_12_21_2012];";
-                SqlCommand cmd = new SqlCommand(SQLQUERY, conn);
+                string Query = "EXEC getRegions";
+                SqlCommand cmd = new SqlCommand(Query, conn);
                 cmd.Connection.Open();
                 DataTable TempTable = new DataTable();
                 TempTable.Load(cmd.ExecuteReader());

@@ -39,7 +39,7 @@ AS
 			WHEN data_month IN (7, 8, 9) THEN 3
 			ELSE 4
 			END As [Quarter],
-			SUM(PCP) AS PCP
+			AVG(PCP) AS PCP
 			FROM ' + @dbName + ' 
 			
 			 WHERE stateCode = ' + CONVERT(varChar(10),@stateCodeIn)  + 
@@ -149,3 +149,19 @@ AS
 		RETURN (1)
 	END
 GO
+
+CREATE PROCEDURE getRegions
+	
+	AS
+	DECLARE	@retCode int
+	Declare @tableName varChar(50)
+	EXEC @retCode = dbo.getDBName
+		@userName = 'Demo',
+		@password = N'Password',
+		@userTable = @tableName OUTPUT;
+
+	DECLARE @sql nVarChar(max) = 'SELECT DISTINCT stateCode ' +
+                'FROM [ASQLGroup].[dbo].[Demo_2_12_2014]';
+
+	EXEC @sql
+	GO
