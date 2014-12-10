@@ -104,5 +104,5 @@ CREATE PROCEDURE getRegions
 	DECLARE @sql nVarChar(max) = 'SELECT DISTINCT stateCode ' +
                 'FROM [ASQLGroup].[dbo].[' + @tableName + ']';
 
-	EXEC @sql
+	EXEC (@sql)
 	GO
