@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Asql {
+namespace FinalProject {
     
     
-    public partial class Charting {
+    public partial class Visualize {
         
         /// <summary>
         /// chartingForm control.

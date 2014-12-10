@@ -1,0 +1,42 @@
+ERROR
+User: Demo
+Time: 12/10/14 07:08:14 UTC
+Cannot open database "ASQLGroup" requested by the login. The login failed.
+Login failed for user 'dbAccessor'.
+
+
+
+ERROR
+User: Demo
+Time: 12/10/14 07:08:20 UTC
+Cannot open database "ASQLGroup" requested by the login. The login failed.
+Login failed for user 'dbAccessor'.
+
+
+
+ERROR
+User: Demo
+Time: 12/10/14 07:08:48 UTC
+Cannot open database "ASQLGroup" requested by the login. The login failed.
+Login failed for user 'dbAccessor'.
+
+
+
+ERROR
+User: Demo
+Time: 12/10/14 07:08:50 UTC
+Cannot open database "ASQLGroup" requested by the login. The login failed.
+Login failed for user 'dbAccessor'.
+
+
+
+Database Insertion
+User: Demo
+Start time: 12/10/14 14:05:42 UTC
+End time: 12/10/14 14:05:44 UTC
+Start Range: 1950 1
+End Range: 2014 1
+Data present before loading attempt
+User allowed data to be over written
+
+

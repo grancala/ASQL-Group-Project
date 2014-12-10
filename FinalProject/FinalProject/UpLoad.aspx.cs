@@ -164,7 +164,7 @@ namespace FinalProject
 
         protected void visualization_Click(object sender, EventArgs e)
         {
-            // Server.Transfer("Graph.aspx",true);
+            Server.Transfer("Visualize.aspx", true);
         }
     }
 }

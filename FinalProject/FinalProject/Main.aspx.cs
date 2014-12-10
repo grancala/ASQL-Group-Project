@@ -68,7 +68,7 @@ namespace FinalProject
 
         protected void visualize_Click(object sender, EventArgs e)
         {
-            // Server.Transfer("Graph.aspx",true);
+            Server.Transfer("Visualize.aspx",true);
         }
     }
 }

@@ -3,10 +3,10 @@
   <Items>
     <LogicalFolder Name="Connections" Type="2" Sorted="true">
       <Items>
-        <ConnectionNode Name="JIMS_LAPTOP:JIMS_LAPTOP\Jim">
-          <Created>2014-12-07T11:05:21.9687062-05:00</Created>
+        <ConnectionNode Name="NICKSCHOOL-PC:NICKSCHOOL-PC\Nick">
+          <Created>2014-12-10T00:37:10.2069894-05:00</Created>
           <Type>SQL</Type>
-          <Server>JIMS_LAPTOP</Server>
+          <Server>NICKSCHOOL-PC</Server>
           <UserName />
           <Authentication>Windows Authentication</Authentication>
           <InitialDB />
@@ -20,38 +20,38 @@
     <LogicalFolder Name="Queries" Type="0" Sorted="true">
       <Items>
         <FileNode Name="~DbSetup.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:JIMS_LAPTOP:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>JIMS_LAPTOP</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:NICKSCHOOL-PC:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>NICKSCHOOL-PC</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>~DbSetup.sql</FullPath>
         </FileNode>
         <FileNode Name="~DbTestDataPop.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:JIMS_LAPTOP:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>JIMS_LAPTOP</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:NICKSCHOOL-PC:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>NICKSCHOOL-PC</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>~DbTestDataPop.sql</FullPath>
         </FileNode>
         <FileNode Name="GenericSearchProc.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:JIMS_LAPTOP:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>JIMS_LAPTOP</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:NICKSCHOOL-PC:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>NICKSCHOOL-PC</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>GenericSearchProc.sql</FullPath>
         </FileNode>
         <FileNode Name="JimsJungle.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:JIMS_LAPTOP:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>JIMS_LAPTOP</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:NICKSCHOOL-PC:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>NICKSCHOOL-PC</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>JimsJungle.sql</FullPath>
         </FileNode>
         <FileNode Name="NicksNutHouse.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:JIMS_LAPTOP:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>JIMS_LAPTOP</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:NICKSCHOOL-PC:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>NICKSCHOOL-PC</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>NicksNutHouse.sql</FullPath>
         </FileNode>
         <FileNode Name="TestingQuery.SQL">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:JIMS_LAPTOP:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>JIMS_LAPTOP</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
           <AssociatedConnUserName />
           <FullPath>TestingQuery.SQL</FullPath>
         </FileNode>
