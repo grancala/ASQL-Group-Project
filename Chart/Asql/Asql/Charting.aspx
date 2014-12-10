@@ -14,8 +14,6 @@
             var chart = new google.visualization.LineChart(document.getElementById("chart_div"));
             var Options = { title: "Visualization Satisfaction", hAxis: { title: "Programming method" }, vAxis: { title: "Units" } };
             chart.draw(data, Options);
-            var dash_container = document.getElementById('dashBoard_div'),
-            myDashboard = new google.visualization.Dashboard(dash_container);
         });
     </script>
 </head>
@@ -24,8 +22,8 @@
          Select ChartType:       
         <asp:DropDownList ID="ChartType" runat="server" OnSelectedIndexChanged="SelectedIndexChanged" >
             <asp:ListItem Selected="True" Value="1">Precipitation</asp:ListItem>
-            <asp:ListItem Value="1">Temperature</asp:ListItem>
-            <asp:ListItem Value="2">Averages</asp:ListItem>
+            <asp:ListItem Value="2">Temperature</asp:ListItem>
+            <asp:ListItem Value="3">Averages</asp:ListItem>
          </asp:DropDownList>
         </br>
          Select Region:       
