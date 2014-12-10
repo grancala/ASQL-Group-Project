@@ -1,4 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManageUsers.aspx.cs" Inherits="FinalProject.ManageUsers" %>
+﻿<!--FILE : ManageUsers.aspx
+    PROJECT : ASQL - Group Project
+    PROGRAMMER(S) : Nick Whitney, Constantine Grigoriadis, Jim Raithby
+    FIRST VERSION : 12/6/2014
+    DESCRIPTION : Allows the user to manipulate user accounts -->
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManageUsers.aspx.cs" Inherits="FinalProject.ManageUsers" %>
 
 <!DOCTYPE html>
 

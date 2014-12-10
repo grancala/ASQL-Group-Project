@@ -1,4 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="FinalProject.Login" %>
+﻿<!--FILE : Login.aspx
+    PROJECT : ASQL - Group Project
+    PROGRAMMER(S) : Nick Whitney, Constantine Grigoriadis, Jim Raithby
+    FIRST VERSION : 12/6/2014
+    DESCRIPTION : Allows the user to log in -->
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="FinalProject.Login" %>
 
 <!DOCTYPE html>
 

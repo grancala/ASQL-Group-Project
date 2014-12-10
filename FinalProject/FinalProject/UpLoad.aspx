@@ -1,4 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UpLoad.aspx.cs" Inherits="FinalProject.UpLoad" %>
+﻿<!--FILE : UpLoad.aspx
+    PROJECT : ASQL - Group Project
+    PROGRAMMER(S) : Nick Whitney, Constantine Grigoriadis, Jim Raithby
+    FIRST VERSION : 12/6/2014
+    DESCRIPTION : Allows the users to upload to the database -->
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UpLoad.aspx.cs" Inherits="FinalProject.UpLoad" %>
 
 <!DOCTYPE html>
 

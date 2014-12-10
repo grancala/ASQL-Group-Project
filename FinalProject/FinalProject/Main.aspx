@@ -1,4 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Main.aspx.cs" Inherits="FinalProject.Main" %>
+﻿<!--FILE : Main.aspx
+    PROJECT : ASQL - Group Project
+    PROGRAMMER(S) : Nick Whitney, Constantine Grigoriadis, Jim Raithby
+    FIRST VERSION : 12/6/2014
+    DESCRIPTION : Contains a main menu for the user -->
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Main.aspx.cs" Inherits="FinalProject.Main" %>
 
 <!DOCTYPE html>
 
