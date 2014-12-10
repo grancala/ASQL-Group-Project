@@ -62,7 +62,7 @@ namespace FinalProject
                 if (!IsPostBack)
                 {
 
-                    Repopulate(101, 1, 1, new DateTime(2001, 1, 1), new DateTime(2013, 1, 1));
+                    Repopulate(101, 1, 1);
                     PopulateRegionDropDown();
                 }
             }
@@ -102,11 +102,7 @@ namespace FinalProject
             int period = Convert.ToInt32(Period.SelectedValue);
             int type = Convert.ToInt32(ChartType.SelectedValue);
 
-            //TODO get start and end from slider
-            DateTime start = new DateTime(2001, 1, 1);
-            DateTime end = new DateTime(2013, 1, 1);
-
-            Repopulate(region, type, period, start, end);
+            Repopulate(region, type, period);
         }
 
 
@@ -129,7 +125,7 @@ namespace FinalProject
         }
 
 
-        private void Repopulate(int region, int type, int period, DateTime start, DateTime end)
+        private void Repopulate(int region, int type, int period)
         {
             DataTable data = new DataTable();
             using (SqlConnection sqlConn = new SqlConnection(DatabaseConnectionString))
@@ -143,8 +139,6 @@ namespace FinalProject
                 command.Parameters.AddWithValue("@stateCodeIn", region);
                 command.Parameters.AddWithValue("@searchType", type);
                 command.Parameters.AddWithValue("@timeIncrement", period);
-                command.Parameters.AddWithValue("@rangeStart", start.Date);
-                command.Parameters.AddWithValue("@rangeEnd", end.Date);
                 command.Parameters.Add("@return", SqlDbType.Int);
                 command.Parameters["@return"].Direction = ParameterDirection.ReturnValue;
                 data.Load(command.ExecuteReader());

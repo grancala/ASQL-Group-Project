@@ -8,14 +8,9 @@ GO
 CREATE PROCEDURE GenericSearchYearly(
     @stateCodeIn int,
     @dbName nVarChar(50),
-    @TheStart Date,
-    @TheEnd Date,
 	@ReturnColumns nVarChar(100)
 	)
 AS
-	DECLARE @dateInfo date = DATEADD(YEAR, DATEPART(YEAR, @TheStart) - 1900, -1);
-	DECLARE @dateInfoEnd date = DATEADD(YEAR, DATEPART(YEAR, @TheEnd) - 1900, -1);
-
 	DECLARE @bigSQL varChar(max) = 
 		'SELECT data_year as [Year]'
 			+ @returnColumns +
@@ -23,9 +18,7 @@ AS
 			'FROM ' + @dbName + ' 
 			
 			 WHERE stateCode = ' + CONVERT(varChar(10),@stateCodeIn)  + 
-			' AND DATEADD(YEAR, data_year-1900, -1) >= ''' +CONVERT(varChar(10), @dateInfo) +
-			''' AND DATEADD(YEAR, data_year-1900, -1) <= ''' + CONVERT(varChar(10), @dateInfoEnd) + 
-			'''	GROUP BY
+			'	GROUP BY
 			data_year
 		ORDER BY
 		    [Year]
@@ -42,14 +35,9 @@ GO
 CREATE PROCEDURE GenericSearchQuarterly(
     @stateCodeIn int,
     @dbName nVarChar(50),
-    @TheStart Date,
-    @TheEnd Date,
 	@ReturnColumns nVarChar(100)
 	)
 AS
-	DECLARE @dateInfo date = DATEADD(YEAR, DATEPART(YEAR, @TheStart) - 1900, DATEADD(qq,  DATEPART(QUARTER, @TheStart), -1));
-	DECLARE @dateInfoEnd date = DATEADD(YEAR, DATEPART(YEAR, @TheEnd) - 1900, DATEADD(qq,  DATEPART(QUARTER, @TheEnd), -1));
-
 	DECLARE @bigSQL varChar(max) = 
 		'SELECT data_year as [Year],
 		CASE
@@ -63,9 +51,7 @@ AS
 			'FROM ' + @dbName + ' 
 			
 			 WHERE stateCode = ' + CONVERT(varChar(10),@stateCodeIn)  + 
-			' AND DATEADD(YEAR, data_year-1900, DATEADD(MM, data_month, -1)) >= ''' +CONVERT(varChar(10), @dateInfo) +
-			''' AND DATEADD(YEAR, data_year-1900, DATEADD(MM, data_month, -1)) <= ''' + CONVERT(varChar(10), @dateInfoEnd) + 
-			'''	GROUP BY
+			'	GROUP BY
 			data_year,
 			CASE
 			    WHEN data_month IN (1, 2, 3) THEN 1
@@ -88,14 +74,9 @@ GO
 CREATE PROCEDURE GenericSearchMonthly(
     @stateCodeIn int,
     @dbName nVarChar(50),
-    @TheStart Date,
-    @TheEnd Date,
 	@ReturnColumns nVarChar(100)
 	)
 AS
-	DECLARE @dateInfo date = DATEADD(YEAR, DATEPART(YEAR, @TheStart) - 1900, DATEADD(MM,  DATEPART(MONTH, @TheStart), -1));
-	DECLARE @dateInfoEnd date = DATEADD(YEAR, DATEPART(YEAR, @TheEnd) - 1900, DATEADD(MM,  DATEPART(MONTH, @TheEnd), -1));
-
 	DECLARE @bigSQL varChar(max) = 
 		'SELECT data_year as [Year], 
 				data_month as [Month]'
@@ -103,9 +84,7 @@ AS
 			'FROM ' + @dbName + ' 
 			
 			 WHERE stateCode = ' + CONVERT(varChar(10),@stateCodeIn)  + 
-			' AND DATEADD(YEAR, data_year-1900, DATEADD(MM, data_month, -1)) >= ''' +CONVERT(varChar(10), @dateInfo) +
-			''' AND DATEADD(YEAR, data_year-1900, DATEADD(MM, data_month, -1)) <= ''' + CONVERT(varChar(10), @dateInfoEnd) + 
-			'''	GROUP BY
+			'	GROUP BY
 			data_year,
 			data_month
 		ORDER BY
@@ -125,9 +104,7 @@ CREATE PROCEDURE GenericSearch(
 	@password nVarChar(50),
 	@stateCodeIn int,
     @searchType int,
-	@timeIncrement int,
-    @rangeStart Date,
-    @rangeEnd Date
+	@timeIncrement int
 	
 	--@searchType int
 	)
@@ -163,8 +140,6 @@ AS
 			EXEC GenericSearchMonthly 
 				@stateCodeIn = @stateCodeIn,
 				@dbName = @userTable,
-				@TheStart = @rangeStart,
-				@TheEnd = @rangeEnd,
 				@ReturnColumns = @ReturnColumns
 			END
 		ELSE
@@ -174,8 +149,6 @@ AS
 				EXEC GenericSearchQuarterly 
 					@stateCodeIn = @stateCodeIn,
 					@dbName = @userTable,
-					@TheStart = @rangeStart,
-					@TheEnd = @rangeEnd,
 					@ReturnColumns = @ReturnColumns
 				END
 			ELSE
@@ -185,8 +158,6 @@ AS
 					EXEC GenericSearchYearly 
 						@stateCodeIn = @stateCodeIn,
 						@dbName = @userTable,
-						@TheStart = @rangeStart,
-						@TheEnd = @rangeEnd,
 						@ReturnColumns = @ReturnColumns
 					END
 				ELSE

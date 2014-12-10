@@ -185,3 +185,7 @@ FakesAssemblies/
 *.ssms_suo
 *.ssms_suo
 *.ssms_suo
+ASQL4/ASQL4/~DbSetup.sql
+ASQL4/ASQL4/~DbTestDataPop.sql
+Chart/Asql/Asql/Properties/Resources.Designer.cs
+Chart/Asql/Asql/Properties/Resources.resx
