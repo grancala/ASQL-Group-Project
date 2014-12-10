@@ -22,14 +22,14 @@
 <body>
     <form id="chartingForm" runat="server">
          Select ChartType:       
-        <asp:DropDownList ID="ChartType" runat="server" OnSelectedIndexChanged="ChartType_SelectedIndexChanged" >
+        <asp:DropDownList ID="ChartType" runat="server" OnSelectedIndexChanged="SelectedIndexChanged" >
             <asp:ListItem Selected="True" Value="1">Precipitation</asp:ListItem>
             <asp:ListItem Value="1">Temperature</asp:ListItem>
             <asp:ListItem Value="2">Averages</asp:ListItem>
          </asp:DropDownList>
         </br>
          Select Region:       
-        <asp:DropDownList ID="RegionLookup" runat="server" OnSelectedIndexChanged="RegionLookup_SelectedIndexChanged" > </asp:DropDownList>
+        <asp:DropDownList ID="RegionLookup" runat="server" OnSelectedIndexChanged="SelectedIndexChanged" > </asp:DropDownList>
          </br>
             <asp:RadioButtonList id="Period" runat="server" Height="88px" Width="218px" OnSelectedIndexChanged="Period_SelectedIndexChanged" >
             <asp:ListItem>Annually</asp:ListItem>

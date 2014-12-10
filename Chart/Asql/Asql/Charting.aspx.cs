@@ -71,17 +71,19 @@ namespace Asql
             //fill dropDown
         }
 
-        protected void RegionLookup_SelectedIndexChanged(object sender, EventArgs e)
+        protected void SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            // repopulate the display 
+            
         }
 
         protected void Period_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            SelectedIndexChanged(sender, e);
+            // change timescale
         }
 
-        protected void ChartType_SelectedIndexChanged(object sender, EventArgs e)
+        private void Repopulate(int region, int type, int period)
         {
 
         }
@@ -90,7 +92,5 @@ namespace Asql
         {
 
         }
-
-
     }
 }
