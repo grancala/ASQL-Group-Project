@@ -11,13 +11,14 @@ namespace FinalProject
 {
     public partial class Visualize : System.Web.UI.Page
     {
-        string username;
-        string password;
+        string username = string.Empty;
+        string password = string.Empty;
 
         string DatabaseConnectionString = string.Empty;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            bool logged = false;
             #region common
             // get config
             switch (LoadConfig.Load(Server.MapPath("~/")))
@@ -47,16 +48,22 @@ namespace FinalProject
                 // not logged in
                 Server.Transfer("Login.aspx", true);
             }
+            else
+            {
+                logged = true;
+            }
 
             #endregion
-
-            DatabaseConnectionString = Database.ConnectionString;
-
-            if (!IsPostBack)
+            if(logged)
             {
-                Repopulate(101, 1, 1, new DateTime(2001, 1, 1), new DateTime(2013, 1, 1));
-                PopulateRegionDropDown();
-            };
+                DatabaseConnectionString = Database.ConnectionString;
+                if (!IsPostBack)
+                {
+
+                    Repopulate(101, 1, 1, new DateTime(2001, 1, 1), new DateTime(2013, 1, 1));
+                    PopulateRegionDropDown();
+                }
+            }
         }
 
 
