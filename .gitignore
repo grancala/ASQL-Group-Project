@@ -183,3 +183,5 @@ UpgradeLog*.htm
 FakesAssemblies/
 *.ssmssqlproj
 *.ssms_suo
+*.ssms_suo
+*.ssms_suo

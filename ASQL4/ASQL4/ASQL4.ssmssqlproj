@@ -49,12 +49,6 @@
           <AssociatedConnUserName />
           <FullPath>NicksNutHouse.sql</FullPath>
         </FileNode>
-        <FileNode Name="SearchQueries.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:JIMS_LAPTOP:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>JIMS_LAPTOP</AssociatedConnSrvName>
-          <AssociatedConnUserName />
-          <FullPath>SearchQueries.sql</FullPath>
-        </FileNode>
         <FileNode Name="TestingQuery.SQL">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:JIMS_LAPTOP:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>JIMS_LAPTOP</AssociatedConnSrvName>

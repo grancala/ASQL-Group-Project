@@ -1,3 +1,4 @@
+/*
 IF OBJECT_ID('SearchQuarterlyPCP', 'P') IS NOT NULL
     DROP PROCEDURE SearchQuarterlyPCP;
 GO
@@ -209,7 +210,9 @@ TAvg = Take the average of the averages for the period
 CDD/HDD = Take the average of the period
 Precipitation = Take the average of the period
 */
-
+*/
+USE ASQLGroup
+GO
 
 IF OBJECT_ID('testMonthlyPCP', 'P') IS NOT NULL
     DROP PROCEDURE testMonthlyPCP;
@@ -231,10 +234,14 @@ EXEC	@return_value = getDBName
 		@password = N'Password',
 		@userTable = @userTable OUTPUT
 
-
-EXEC SearchQuarterlyTemperature
+		
+EXEC GenericSearchYearly
 	 @stateCodeIn  = 101,
     @dbName = @userTable,
     @TheStart = @start,
-    @TheEnd =@end
+    @TheEnd =@end,
+	--@ReturnColumns = ', SUM(PCP) AS PCP '
+	@ReturnColumns = ',	SUM(CDD) AS CDD, SUM(HDD) AS HDD '
+			
+	--@ReturnColumns = ',	MAX(TMAX) AS TMAX, MIN(TMIN) AS TMIN, AVG(TAVG) AS TAVG '
 	GO
