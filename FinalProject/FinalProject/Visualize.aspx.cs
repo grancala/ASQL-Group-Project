@@ -19,6 +19,7 @@ namespace FinalProject
         protected void Page_Load(object sender, EventArgs e)
         {
             bool logged = false;
+
             #region common
             // get config
             switch (LoadConfig.Load(Server.MapPath("~/")))
@@ -54,6 +55,7 @@ namespace FinalProject
             }
 
             #endregion
+
             if(logged)
             {
                 DatabaseConnectionString = Database.ConnectionString;

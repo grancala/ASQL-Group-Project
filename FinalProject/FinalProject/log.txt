@@ -30,3 +30,13 @@ Login failed for user 'dbAccessor'.
 
 
 
+Database Insertion
+User: Demo
+Start time: 12/10/14 14:05:42 UTC
+End time: 12/10/14 14:05:44 UTC
+Start Range: 1950 1
+End Range: 2014 1
+Data present before loading attempt
+User allowed data to be over written
+
+
