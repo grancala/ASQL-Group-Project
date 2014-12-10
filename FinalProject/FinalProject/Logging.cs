@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace project
+namespace FinalProject
 {
     /// <summary>
     /// Logs to a file specified in the config file
@@ -37,7 +37,7 @@ namespace project
             builder.AppendLine("Start Range: " + iYear.ToString() + " " + iMonth.ToString());
             builder.AppendLine("End Range: " + fYear.ToString() + " " + fMonth.ToString());
 
-            if(DataBefore)
+            if (DataBefore)
             {
                 builder.AppendLine("Data present before loading attempt");
                 if (Overwrite)
@@ -79,7 +79,7 @@ namespace project
             WriteFile(builder.ToString());
         }
 
-        
+
         /// <summary>
         /// Formats a time into a MM/dd/yy HH:mm:ss format
         /// </summary>

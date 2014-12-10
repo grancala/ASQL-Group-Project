@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace project
+namespace FinalProject
 {
     /// <summary>
     /// Class to represent a single line in the database and in the file
@@ -42,43 +42,43 @@ namespace project
             get { return month; }
             set { month = value; }
         }
-        
+
         public decimal Tavg
         {
             get { return tavg; }
             set { tavg = value; }
         }
-        
+
         public decimal Tmin
         {
             get { return tmin; }
             set { tmin = value; }
         }
-        
+
         public decimal Tmax
         {
             get { return tmax; }
             set { tmax = value; }
         }
-        
+
         public decimal PCP
         {
             get { return pcp; }
             set { pcp = value; }
         }
-        
+
         public int CDD
         {
             get { return cdd; }
             set { cdd = value; }
         }
-        
+
         public int HDD
         {
             get { return hdd; }
             set { hdd = value; }
         }
-        
+
         #endregion
 
 
@@ -87,9 +87,9 @@ namespace project
         private List<String> FailedParses = new List<string>();
         private bool isValid = true;
 
-        public bool IsValid 
-        { 
-            get { return isValid; } 
+        public bool IsValid
+        {
+            get { return isValid; }
         }
 
         #endregion
@@ -102,7 +102,7 @@ namespace project
         public StateWeatherInfo(string[] data)
         {
             // ensures data has enough lines
-            if(data.Count() != (int)HeaderOptions.END)
+            if (data.Count() != (int)HeaderOptions.END)
             {
                 isValid = false;
             }
@@ -129,7 +129,7 @@ namespace project
                 }
 
                 // attempts to parse the pcp, and transform it into mm
-                if(Decimal.TryParse(data[(int)HeaderOptions.PCP].Trim(),out pcp))
+                if (Decimal.TryParse(data[(int)HeaderOptions.PCP].Trim(), out pcp))
                 {
                     pcp = Helper.InchesToMM(pcp);
                 }
@@ -193,7 +193,7 @@ namespace project
                 SetDefaults();
             }
         }
-        
+
 
         /// <summary>
         /// Sets all database data members to known values

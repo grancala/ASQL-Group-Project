@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace project
+namespace FinalProject
 {
     /// <summary>
     /// Class to emulate a file full of data
@@ -53,7 +51,7 @@ namespace project
                     // attempts to split data and enter ino a new state weather info
                     string[] data = lines[lineNumber].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                     StateWeatherInfo temp = new StateWeatherInfo(data);
-                    if(temp.IsValid)
+                    if (temp.IsValid)
                     {
                         info.Add(new StateWeatherInfo(data));
                     }
@@ -115,11 +113,11 @@ namespace project
                 table.Columns.Add("TMIN", typeof(double));
                 table.Columns.Add("TMAX", typeof(double));
 
-                foreach(StateWeatherInfo current in info)
+                foreach (StateWeatherInfo current in info)
                 {
                     table.Rows.Add(current.StateCode, current.Year, current.Month, current.PCP, current.CDD, current.HDD, current.Tavg, current.Tmin, current.Tmax);
                 }
-                
+
 
                 if (Database.Insert(UserName, TableName, table))
                 {

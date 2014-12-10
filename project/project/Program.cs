@@ -13,34 +13,19 @@ namespace project
             string configFile = "config.ini";
             bool configSuccess = true;
             string dataFile = string.Empty;
-
-            //"Server=tcp:czsi7abult.database.windows.net,1433;
-            //Database=a3ETL_db;
-            //Uid=a3ETL@czsi7abult;
-            //Pwd=Asql1234!;
-            //Encrypt=yes;
-            //Connection Timeout=30;
-
-            // azure connection requirements
-            string Server = string.Empty;
-            string Database = string.Empty;
-            string Uid = string.Empty;
-            string Pwd = string.Empty;
-            string Encrypted = string.Empty;
-            string ConnectionTimeout = string.Empty;
             string LogFile = string.Empty;
+            string connectionString = string.Empty;
+            string UserName = "Demo";
+            string TableName = "Nick_20141209";
+
+            #region config file
 
             // attempts to load and get data from the config file
             try
             {
                 ConfigFile config = new ConfigFile(configFile);
 
-                Server = config.getValue("Server");
-                Database = config.getValue("Database");
-                Uid = config.getValue("Uid");
-                Pwd = config.getValue("Pwd");
-                Encrypted = config.getValue("Encrypted");
-                ConnectionTimeout = config.getValue("ConnectionTimeout");
+                connectionString = config.getValue("connectionString");
                 dataFile = config.getValue("DataFile");
                 LogFile = config.getValue("LogFile");
             }
@@ -50,23 +35,64 @@ namespace project
                 configSuccess = false;
             }
 
+            #endregion
+
+            #region excute
+
             // if config file was successfully loaded and parsed
             if(configSuccess)
             {
                 // set log file and load data
                 Logging.FileName = LogFile;
+                Database.ConnectionString = connectionString;
 
-                FileData file = new FileData();
-                bool success = file.Load("Current User", dataFile);
-                if (success)
+                // FROM EMPTY DB
+                string userName = "Nick";
+                string password = "Incorrect";
+                if (Database.CreateUser(userName))
                 {
-                    Console.WriteLine("Successful load");
+                    Console.WriteLine("Success creating user");
+                    if (Database.CreateTable(userName, password, true))
+                    {
+                        Console.WriteLine("Success creating table");
+                        FileData file = new FileData();
+                        bool success = file.Load(UserName, dataFile);
+                        if (success)
+                        {
+                            Console.WriteLine("Successful load");
+                            success = file.Insert(UserName, TableName, false, false);
+                            if (success)
+                            {
+                                Console.WriteLine("Successful insert");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Failure 4");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Failure 3");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Failure 2");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Failure");
+                    Console.WriteLine("Failure 1");
                 }
+
+                
             }
+            else
+            {
+                Console.WriteLine("Failed config");
+            }
+            Console.ReadKey(true);
+            #endregion
         }
     }
 }

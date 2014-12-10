@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigFile.cs" />
+    <Compile Include="Database.cs" />
     <Compile Include="FileData.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Logging.cs" />
