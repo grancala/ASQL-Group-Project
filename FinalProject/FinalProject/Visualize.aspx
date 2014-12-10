@@ -22,7 +22,7 @@
 
             // Create a date range slider
             var myDateSlider = new google.visualization.ControlWrapper({
-                'controlType': 'ChartRangeFilter',
+                'controlType': 'DateRangeFilter',
                 'containerId': 'control_div',
                 'options': {
                     'filterColumnLabel': 'Time'
@@ -59,6 +59,7 @@
     <form id="chartingForm" runat="server">
         <input id="btnprint" type="button" onclick="PrintDiv()" value="Print" />
         <asp:Button ID="BackToMain" runat="server" OnClick="BackToMain_Click" text="Back To Main" />
+        <br /><br />
          Select ChartType:       
         <asp:DropDownList ID="ChartType" runat="server" AutoPostBack="true" OnSelectedIndexChanged="SelectedIndexChanged" >
             <asp:ListItem Selected="True" Value="1">Precipitation</asp:ListItem>
