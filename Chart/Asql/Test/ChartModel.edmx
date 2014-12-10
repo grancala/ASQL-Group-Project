@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ASQLGroupModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Demo_12_21_2012">
+          <Key>
+            <PropertyRef Name="stateCode" />
+            <PropertyRef Name="data_year" />
+            <PropertyRef Name="data_month" />
+          </Key>
+          <Property Name="stateCode" Type="int" Nullable="false" />
+          <Property Name="data_year" Type="smallint" Nullable="false" />
+          <Property Name="data_month" Type="tinyint" Nullable="false" />
+          <Property Name="PCP" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CDD" Type="int" />
+          <Property Name="HDD" Type="int" />
+          <Property Name="TAVG" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TMIN" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TMAX" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityContainer Name="ASQLGroupModelStoreContainer">
+          <EntitySet Name="Demo_12_21_2012" EntityType="Self.Demo_12_21_2012" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ASQLGroupModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Demo_12_21_2012">
+          <Key>
+            <PropertyRef Name="stateCode" />
+            <PropertyRef Name="data_year" />
+            <PropertyRef Name="data_month" />
+          </Key>
+          <Property Name="stateCode" Type="Int32" Nullable="false" />
+          <Property Name="data_year" Type="Int16" Nullable="false" />
+          <Property Name="data_month" Type="Byte" Nullable="false" />
+          <Property Name="PCP" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CDD" Type="Int32" />
+          <Property Name="HDD" Type="Int32" />
+          <Property Name="TAVG" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TMIN" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TMAX" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityContainer Name="ASQLGroupEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Demo_12_21_2012" EntityType="Self.Demo_12_21_2012" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ASQLGroupModelStoreContainer" CdmEntityContainer="ASQLGroupEntities">
+          <EntitySetMapping Name="Demo_12_21_2012">
+            <EntityTypeMapping TypeName="ASQLGroupModel.Demo_12_21_2012">
+              <MappingFragment StoreEntitySet="Demo_12_21_2012">
+                <ScalarProperty Name="stateCode" ColumnName="stateCode" />
+                <ScalarProperty Name="data_year" ColumnName="data_year" />
+                <ScalarProperty Name="data_month" ColumnName="data_month" />
+                <ScalarProperty Name="PCP" ColumnName="PCP" />
+                <ScalarProperty Name="CDD" ColumnName="CDD" />
+                <ScalarProperty Name="HDD" ColumnName="HDD" />
+                <ScalarProperty Name="TAVG" ColumnName="TAVG" />
+                <ScalarProperty Name="TMIN" ColumnName="TMIN" />
+                <ScalarProperty Name="TMAX" ColumnName="TMAX" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
