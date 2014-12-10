@@ -7,26 +7,59 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Asql
+namespace FinalProject
 {
-    public partial class Charting : System.Web.UI.Page
+    public partial class Visualize : System.Web.UI.Page
     {
-        string username = "Demo";
-        string password = "Password";
+        string username;
+        string password;
 
-        string DatabaseConnectionString =  Properties.Resources.dbConnectionString;
-        
+        string DatabaseConnectionString = string.Empty;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            #region common
+            // get config
+            switch (LoadConfig.Load(Server.MapPath("~/")))
+            {
+                case -1:
+                    // error
+                    break;
+                case 0:
+                    // not needed
+                    break;
+                case 1:
+                    // success
+                    break;
+            };
+
+            // get login info
+            if (Session["username"] != null)
+            {
+                username = (string)Session["username"];
+            }
+            if (Session["password"] != null)
+            {
+                password = (string)Session["password"];
+            }
+            if (username == "" || password == "")
+            {
+                // not logged in
+                Server.Transfer("Login.aspx", true);
+            }
+
+            #endregion
+
+            DatabaseConnectionString = Database.ConnectionString;
+
+            if (!IsPostBack)
             {
                 Repopulate(101, 1, 1, new DateTime(2001, 1, 1), new DateTime(2013, 1, 1));
                 PopulateRegionDropDown();
             };
         }
-        
-        
+
+
         private void PopulateRegionDropDown()
         {
             //run sql script to get table
@@ -39,13 +72,13 @@ namespace Asql
                 cmd.Parameters.AddWithValue("@password", password);
                 DataTable TempTable = new DataTable();
                 TempTable.Load(cmd.ExecuteReader());
-                foreach(DataColumn TempColumn in TempTable.Columns)
+                foreach (DataColumn TempColumn in TempTable.Columns)
                 {
                     foreach (DataRow row in TempTable.Rows)
                     {
                         string regionCode = row[TempColumn.ColumnName].ToString();
                         RegionLookup.Items.Add(regionCode);
-                         //were done with the current entry move to the next row in the column
+                        //were done with the current entry move to the next row in the column
                     }
                 }
                 conn.Close();
@@ -63,7 +96,7 @@ namespace Asql
             //TODO get start and end from slider
             DateTime start = new DateTime(2001, 1, 1);
             DateTime end = new DateTime(2013, 1, 1);
-            
+
             Repopulate(region, type, period, start, end);
         }
 
@@ -86,15 +119,15 @@ namespace Asql
             }
         }
 
-        
+
         private void Repopulate(int region, int type, int period, DateTime start, DateTime end)
         {
-           DataTable data = new DataTable();
+            DataTable data = new DataTable();
             using (SqlConnection sqlConn = new SqlConnection(DatabaseConnectionString))
             {
                 sqlConn.Open();
                 //TODO replace with actual info
-                SqlCommand command = new SqlCommand("GenericSearch", sqlConn); 
+                SqlCommand command = new SqlCommand("GenericSearch", sqlConn);
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@userName", username);
                 command.Parameters.AddWithValue("@password", password);
@@ -124,13 +157,13 @@ namespace Asql
         }
 
 
-        private DataTable SetUpTable (DataTable format, int period, int type)
+        private DataTable SetUpTable(DataTable format, int period, int type)
         {
             DataTable formatted = new DataTable();
 
             formatted.Columns.Add("Time", typeof(DateTime));
-  
-            switch(type)
+
+            switch (type)
             {
                 case 1:
                     formatted.Columns.Add("PCP", typeof(decimal));
@@ -262,7 +295,5 @@ namespace Asql
 
             return formatted;
         }
-
-
     }
 }

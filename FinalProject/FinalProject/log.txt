@@ -1,0 +1,32 @@
+ERROR
+User: Demo
+Time: 12/10/14 07:08:14 UTC
+Cannot open database "ASQLGroup" requested by the login. The login failed.
+Login failed for user 'dbAccessor'.
+
+
+
+ERROR
+User: Demo
+Time: 12/10/14 07:08:20 UTC
+Cannot open database "ASQLGroup" requested by the login. The login failed.
+Login failed for user 'dbAccessor'.
+
+
+
+ERROR
+User: Demo
+Time: 12/10/14 07:08:48 UTC
+Cannot open database "ASQLGroup" requested by the login. The login failed.
+Login failed for user 'dbAccessor'.
+
+
+
+ERROR
+User: Demo
+Time: 12/10/14 07:08:50 UTC
+Cannot open database "ASQLGroup" requested by the login. The login failed.
+Login failed for user 'dbAccessor'.
+
+
+

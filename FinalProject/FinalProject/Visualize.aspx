@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Charting.aspx.cs" Inherits="Asql.Charting" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Visualize.aspx.cs" Inherits="FinalProject.Visualize" %>
 
 <!DOCTYPE html>
 

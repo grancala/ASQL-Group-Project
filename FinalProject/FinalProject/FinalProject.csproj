@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GoogleChartsNGraphsControls">
+      <HintPath>..\GoogleChartsNGraphsControls.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -55,6 +58,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Visualization">
+      <HintPath>..\Visualization.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="config.ini">
@@ -77,6 +83,7 @@
     <Content Include="Main.aspx" />
     <Content Include="ManageUsers.aspx" />
     <Content Include="UpLoad.aspx" />
+    <Content Include="Visualize.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +122,13 @@
     </Compile>
     <Compile Include="UpLoad.aspx.designer.cs">
       <DependentUpon>UpLoad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Visualize.aspx.cs">
+      <DependentUpon>Visualize.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Visualize.aspx.designer.cs">
+      <DependentUpon>Visualize.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <PropertyGroup>
