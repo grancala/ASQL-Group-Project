@@ -22,8 +22,8 @@
          Select ChartType:       
         <asp:DropDownList ID="ChartType" runat="server" AutoPostBack="true" OnSelectedIndexChanged="SelectedIndexChanged" >
             <asp:ListItem Selected="True" Value="1">Precipitation</asp:ListItem>
-            <asp:ListItem Value="2">Temperature</asp:ListItem>
-            <asp:ListItem Value="3">Averages</asp:ListItem>
+            <asp:ListItem Value="2">Cooling and Heating Days</asp:ListItem>
+            <asp:ListItem Value="3">Temperatures</asp:ListItem>
          </asp:DropDownList>
         </br>
          Select Region:       
@@ -34,13 +34,13 @@
             <asp:ListItem Selected="True" Value="2">Quarterly</asp:ListItem>
             <asp:ListItem Value="3">Annually</asp:ListItem>
          </asp:RadioButtonList>
-        <asp:Button ID="JimsButton" runat="server" OnClick="JimsButton_Click" />
         <div id ="chart_div" style="width: 700px; height: 300px;"" >
     
         </div>
         <div id ="dashBoard_div" style="width: 700px; height: 300px;"" >
     
         </div>
+        <asp:Button ID="Print" runat="server" Text="Print" OnClick="Print_Click" />
     </form>
 </body>
 </html>

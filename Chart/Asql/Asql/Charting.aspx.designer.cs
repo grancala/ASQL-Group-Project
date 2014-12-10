@@ -49,12 +49,12 @@ namespace Asql {
         protected global::System.Web.UI.WebControls.RadioButtonList Period;
         
         /// <summary>
-        /// JimsButton control.
+        /// Print control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button JimsButton;
+        protected global::System.Web.UI.WebControls.Button Print;
     }
 }
