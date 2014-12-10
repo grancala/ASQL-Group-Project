@@ -14,6 +14,9 @@
             var chart = new google.visualization.LineChart(document.getElementById("chart_div"));
             var Options = { title: "Data Visualization", hAxis: { title: "Time" }, vAxis: { title: "Units" } };
             chart.draw(data, Options);
+            
+            //TODO link to "help" with chart range filter
+            // https://blog.smalldo.gs/2013/04/google-chart-tools-walkthrough-part-3/
         });
 
         function PrintDiv() {
