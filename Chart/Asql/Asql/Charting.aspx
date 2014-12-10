@@ -12,7 +12,7 @@
         google.setOnLoadCallback(function () {
             var data = new google.visualization.DataTable(Chartdata, 0.5);
             var chart = new google.visualization.LineChart(document.getElementById("chart_div"));
-            var Options = { title: "Visualization Satisfaction", hAxis: { title: "Programming method" }, vAxis: { title: "Units" } };
+            var Options = { title: "Data Visualization", hAxis: { title: "Time" }, vAxis: { title: "Units" } };
             chart.draw(data, Options);
         });
     </script>
@@ -20,19 +20,19 @@
 <body>
     <form id="chartingForm" runat="server">
          Select ChartType:       
-        <asp:DropDownList ID="ChartType" runat="server" OnSelectedIndexChanged="SelectedIndexChanged" >
+        <asp:DropDownList ID="ChartType" runat="server" AutoPostBack="true" OnSelectedIndexChanged="SelectedIndexChanged" >
             <asp:ListItem Selected="True" Value="1">Precipitation</asp:ListItem>
             <asp:ListItem Value="2">Temperature</asp:ListItem>
             <asp:ListItem Value="3">Averages</asp:ListItem>
          </asp:DropDownList>
         </br>
          Select Region:       
-        <asp:DropDownList ID="RegionLookup" runat="server" OnSelectedIndexChanged="SelectedIndexChanged" > </asp:DropDownList>
+        <asp:DropDownList ID="RegionLookup" runat="server" AutoPostBack="true" OnSelectedIndexChanged="SelectedIndexChanged" > </asp:DropDownList>
          </br>
-            <asp:RadioButtonList id="Period" runat="server" Height="88px" Width="218px" OnSelectedIndexChanged="Period_SelectedIndexChanged" >
-            <asp:ListItem>Annually</asp:ListItem>
-            <asp:ListItem>Quarterly</asp:ListItem>
-            <asp:ListItem>Monthly</asp:ListItem>
+            <asp:RadioButtonList id="Period" runat="server" Height="88px" Width="218px" AutoPostBack="true" OnSelectedIndexChanged="Period_SelectedIndexChanged" >
+            <asp:ListItem Value="1">Monthly</asp:ListItem>
+            <asp:ListItem Selected="True" Value="2">Quarterly</asp:ListItem>
+            <asp:ListItem Value="3">Annually</asp:ListItem>
          </asp:RadioButtonList>
         <asp:Button ID="JimsButton" runat="server" OnClick="JimsButton_Click" />
         <div id ="chart_div" style="width: 700px; height: 300px;"" >

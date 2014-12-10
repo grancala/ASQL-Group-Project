@@ -23,9 +23,9 @@ namespace Asql
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            Repopulate("Northeast Region", 3, 1, new DateTime(2001, 1, 1), new DateTime(2013, 1, 1));
             if(!IsPostBack)
             {
+                Repopulate(101, 1, 2, new DateTime(2001, 1, 1), new DateTime(2013, 1, 1));
                 PopulateRegionDropDown();
             };
         }
@@ -71,9 +71,9 @@ namespace Asql
 
         protected void SelectedIndexChanged(object sender, EventArgs e)
         {
-            string region = RegionLookup.SelectedValue;
-            int period = Period.SelectedIndex;
-            int type = ChartType.SelectedIndex;
+            int region = Convert.ToInt32(RegionLookup.SelectedValue);
+            int period = Convert.ToInt32(Period.SelectedValue);
+            int type = Convert.ToInt32(ChartType.SelectedValue);
 
             //TODO get start and end from slider
             DateTime start = DateTime.Now;
@@ -100,9 +100,9 @@ namespace Asql
             }
         }
 
-        private void Repopulate(string region, int type, int period, DateTime start, DateTime end)
+        private void Repopulate(int region, int type, int period, DateTime start, DateTime end)
         {
-            DataTable data = new DataTable();
+           DataTable data = new DataTable();
             using (SqlConnection sqlConn = new SqlConnection(DatabaseConnectionString))
             {
                 sqlConn.Open();
@@ -142,7 +142,14 @@ namespace Asql
         {
             DataTable formatted = new DataTable();
 
-            formatted.Columns.Add("Time", typeof(DateTime));
+            if (period!=3)
+            {
+                formatted.Columns.Add("Time", typeof(DateTime));
+            }
+            else
+            {
+                formatted.Columns.Add("Time", typeof(int));
+            }
   
             switch(type)
             {
@@ -212,14 +219,14 @@ namespace Asql
                             case 1:
                                 formatted.Rows.Add(new DateTime(
                                     Convert.ToInt16(row["Year"]),
-                                    Convert.ToByte(row["Quarter"]),
+                                    (Convert.ToByte(row["Quarter"]) * 3 - 2),
                                     1),
                                     Convert.ToDecimal(row["PCP"]));
                                 break;
                             case 2:
                                 formatted.Rows.Add(new DateTime(
                                     Convert.ToInt16(row["Year"]),
-                                    Convert.ToByte(row["Quarter"]),
+                                    (Convert.ToByte(row["Quarter"]) * 3 - 2),
                                     1),
                                     Convert.ToInt32(row["CDD"]),
                                     Convert.ToInt32(row["HDD"]));
@@ -227,7 +234,7 @@ namespace Asql
                             case 3:
                                 formatted.Rows.Add(new DateTime(
                                     Convert.ToInt16(row["Year"]),
-                                    Convert.ToByte(row["Quarter"]),
+                                    (Convert.ToByte(row["Quarter"]) * 3 - 2),
                                     1),
                                     Convert.ToDecimal(row["TMax"]),
                                     Convert.ToDecimal(row["TMin"]),
@@ -246,19 +253,16 @@ namespace Asql
                         switch (type)
                         {
                             case 1:
-                                formatted.Rows.Add(new DateTime(
-                                    Convert.ToInt16(row["Year"]), 1, 1),
+                                formatted.Rows.Add(Convert.ToInt16(row["Year"]),
                                     Convert.ToDecimal(row["PCP"]));
                                 break;
                             case 2:
-                                formatted.Rows.Add(new DateTime(
-                                    Convert.ToInt16(row["Year"]), 1, 1),
+                                formatted.Rows.Add(Convert.ToInt16(row["Year"]),
                                     Convert.ToInt32(row["CDD"]),
                                     Convert.ToInt32(row["HDD"]));
                                 break;
                             case 3:
-                                formatted.Rows.Add(new DateTime(
-                                    Convert.ToInt16(row["Year"]), 1, 1),
+                                formatted.Rows.Add(Convert.ToInt16(row["Year"]),
                                     Convert.ToDecimal(row["TMax"]),
                                     Convert.ToDecimal(row["TMin"]),
                                     Convert.ToDecimal(row["TAvg"]));
