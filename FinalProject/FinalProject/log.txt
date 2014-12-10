@@ -1,42 +1,18 @@
 ERROR
 User: Demo
-Time: 12/10/14 07:08:14 UTC
-Cannot open database "ASQLGroup" requested by the login. The login failed.
+Time: 12/10/14 15:50:05 UTC
+Cannot open server 'jwf4oaozrd' requested by the login. Client with IP address '142.156.74.193' is not allowed to access the server.  To enable access, use the Windows Azure Management Portal or run sp_set_firewall_rule on the master database to create a firewall rule for this IP address or address range.  It may take up to five minutes for this change to take effect.
 Login failed for user 'dbAccessor'.
+This session has been assigned a tracing ID of '48e2479d-0082-4937-91ed-62294065dccd'.  Provide this tracing ID to customer support when you need assistance.
 
 
 
 ERROR
 User: Demo
-Time: 12/10/14 07:08:20 UTC
-Cannot open database "ASQLGroup" requested by the login. The login failed.
+Time: 12/10/14 15:53:19 UTC
+Cannot open server 'jwf4oaozrd' requested by the login. Client with IP address '142.156.74.193' is not allowed to access the server.  To enable access, use the Windows Azure Management Portal or run sp_set_firewall_rule on the master database to create a firewall rule for this IP address or address range.  It may take up to five minutes for this change to take effect.
 Login failed for user 'dbAccessor'.
+This session has been assigned a tracing ID of '4378beab-c449-4f57-ac88-4fe7234aae36'.  Provide this tracing ID to customer support when you need assistance.
 
-
-
-ERROR
-User: Demo
-Time: 12/10/14 07:08:48 UTC
-Cannot open database "ASQLGroup" requested by the login. The login failed.
-Login failed for user 'dbAccessor'.
-
-
-
-ERROR
-User: Demo
-Time: 12/10/14 07:08:50 UTC
-Cannot open database "ASQLGroup" requested by the login. The login failed.
-Login failed for user 'dbAccessor'.
-
-
-
-Database Insertion
-User: Demo
-Start time: 12/10/14 14:05:42 UTC
-End time: 12/10/14 14:05:44 UTC
-Start Range: 1950 1
-End Range: 2014 1
-Data present before loading attempt
-User allowed data to be over written
 
 
