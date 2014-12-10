@@ -1,4 +1,9 @@
-﻿using System;
+﻿///FILE : Logging.cs
+///PROJECT : ASQL - Group Project
+///PROGRAMMER(S) : Nick Whitney, Constantine Grigoriadis, Jim Raithby
+///FIRST VERSION : 12/6/2014
+///DESCRIPTION : Loads a config file into memory and allows users to access given lines
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;

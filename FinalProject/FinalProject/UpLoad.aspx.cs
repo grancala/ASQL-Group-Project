@@ -1,4 +1,9 @@
-﻿using System;
+﻿///FILE : UpLoad.cs
+///PROJECT : ASQL - Group Project
+///PROGRAMMER(S) : Nick Whitney, Constantine Grigoriadis, Jim Raithby
+///FIRST VERSION : 12/6/2014
+///DESCRIPTION : Allows the user to upload their .csv file
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,6 +13,9 @@ using System.Web.UI.WebControls;
 
 namespace FinalProject
 {
+    /// <summary>
+    /// Code behind for UpLoad.aspx
+    /// </summary>
     public partial class UpLoad : System.Web.UI.Page
     {
         string username = string.Empty;
@@ -15,6 +23,11 @@ namespace FinalProject
         bool tablePresent = false;
 
 
+        /// <summary>
+        /// Ensures config is loaded and user is logged in
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
             #region common
@@ -91,6 +104,12 @@ namespace FinalProject
         }
 
 
+        /// <summary>
+        /// Attempts to upload a file, load from the file
+        /// Create a table and populate that table
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Upload_Click(object sender, EventArgs e)
         {
             bool fileUploaded = false;
@@ -157,11 +176,21 @@ namespace FinalProject
             }
         }
 
+        /// <summary>
+        /// Redirects to main
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void BackToMain_Click(object sender, EventArgs e)
         {
             Server.Transfer("Main.aspx", true);
         }
 
+        /// <summary>
+        /// Redirects to visualization
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void visualization_Click(object sender, EventArgs e)
         {
             Server.Transfer("Visualize.aspx", true);

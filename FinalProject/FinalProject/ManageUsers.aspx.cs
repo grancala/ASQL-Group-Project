@@ -1,4 +1,9 @@
-﻿using System;
+﻿///FILE : ManageUsers.cs
+///PROJECT : ASQL - Group Project
+///PROGRAMMER(S) : Nick Whitney, Constantine Grigoriadis, Jim Raithby
+///FIRST VERSION : 12/6/2014
+///DESCRIPTION : Allows the user to manage uses, create, update and remove
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,8 +12,16 @@ using System.Web.UI.WebControls;
 
 namespace FinalProject
 {
+    /// <summary>
+    /// Code behind for ManageUsers.aspx
+    /// </summary>
     public partial class ManageUsers : System.Web.UI.Page
     {
+        /// <summary>
+        /// Ensures config is loaded
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
             // get config
@@ -27,6 +40,11 @@ namespace FinalProject
         }
 
 
+        /// <summary>
+        /// Attempts to register a user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Register_Click(object sender, EventArgs e)
         {
             string username = txtUserReg.Text;
@@ -43,6 +61,11 @@ namespace FinalProject
         }
 
 
+        /// <summary>
+        /// Attempts to update a user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Update_Click(object sender, EventArgs e)
         {
             string username = txtUserUpdate.Text;
@@ -61,6 +84,11 @@ namespace FinalProject
         }
 
 
+        /// <summary>
+        /// Attempts to remove a user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Remove_Click(object sender, EventArgs e)
         {
             string username = txtUserRem.Text;

@@ -1,4 +1,9 @@
-﻿using System;
+﻿///FILE : LoadConfig.cs
+///PROJECT : ASQL - Group Project
+///PROGRAMMER(S) : Nick Whitney, Constantine Grigoriadis, Jim Raithby
+///FIRST VERSION : 12/6/2014
+///DESCRIPTION : Calls Config file to load data
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;

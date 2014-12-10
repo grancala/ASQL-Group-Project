@@ -1,4 +1,10 @@
-﻿using System;
+﻿///FILE : Logging.cs
+///PROJECT : ASQL - Group Project
+///PROGRAMMER(S) : Nick Whitney, Constantine Grigoriadis, Jim Raithby
+///FIRST VERSION : 12/6/2014
+///DESCRIPTION : Contains a logging class, it will log errors or success into
+///a given filename
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;

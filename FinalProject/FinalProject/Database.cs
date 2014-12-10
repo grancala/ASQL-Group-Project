@@ -1,4 +1,9 @@
-﻿using System;
+﻿///FILE : Database.cs
+///PROJECT : ASQL - Group Project
+///PROGRAMMER(S) : Nick Whitney, Constantine Grigoriadis, Jim Raithby
+///FIRST VERSION : 12/6/2014
+///DESCRIPTION : Class to interface with the database
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;

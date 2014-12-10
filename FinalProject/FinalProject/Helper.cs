@@ -1,4 +1,10 @@
-﻿using System;
+﻿///FILE : Helper.cs
+///PROJECT : ASQL - Group Project
+///PROGRAMMER(S) : Nick Whitney, Constantine Grigoriadis, Jim Raithby
+///FIRST VERSION : 12/6/2014
+///DESCRIPTION : Contains a set of helper functions.
+///Used to convert inches to mm, F to C, extract dates and build error messages
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

@@ -1,4 +1,9 @@
-﻿using System;
+﻿///FILE : Visualize.cs
+///PROJECT : ASQL - Group Project
+///PROGRAMMER(S) : Nick Whitney, Constantine Grigoriadis, Jim Raithby
+///FIRST VERSION : 12/6/2014
+///DESCRIPTION : Allows the user to manipulate a chart of data
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -9,13 +14,22 @@ using System.Web.UI.WebControls;
 
 namespace FinalProject
 {
+    /// <summary>
+    /// Code behind for Visualize.aspx
+    /// </summary>
     public partial class Visualize : System.Web.UI.Page
     {
         string username = string.Empty;
         string password = string.Empty;
 
         string DatabaseConnectionString = string.Empty;
-
+        
+        /// <summary>
+        /// Ensures the config is loaded and the user is logged in,
+        /// sets up selectable regions and initial population of chart
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
             bool logged = false;
@@ -68,7 +82,9 @@ namespace FinalProject
             }
         }
 
-
+        /// <summary>
+        /// Populates the selectable regions
+        /// </summary>
         private void PopulateRegionDropDown()
         {
             //run sql script to get table
@@ -96,6 +112,11 @@ namespace FinalProject
         }
 
 
+        /// <summary>
+        /// When an index is changed, the chart is re-created
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void SelectedIndexChanged(object sender, EventArgs e)
         {
             int region = Convert.ToInt32(RegionLookup.SelectedValue);
@@ -105,7 +126,12 @@ namespace FinalProject
             Repopulate(region, type, period);
         }
 
-
+        /// <summary>
+        /// Calls SelectedIndexChanged()
+        /// Will change the timescale on the time slider (to be done later)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Period_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectedIndexChanged(sender, e);
@@ -125,6 +151,12 @@ namespace FinalProject
         }
 
 
+        /// <summary>
+        /// Repopulates the chart given the region, type and period
+        /// </summary>
+        /// <param name="region">Region code</param>
+        /// <param name="type">Type of chart to make</param>
+        /// <param name="period">Monthly, Quarterly, Annually</param>
         private void Repopulate(int region, int type, int period)
         {
             DataTable data = new DataTable();
@@ -159,7 +191,13 @@ namespace FinalProject
             }
         }
 
-
+        /// <summary>
+        /// Formats a data table to have a date time field to sort on
+        /// </summary>
+        /// <param name="format">table to format</param>
+        /// <param name="period">Monthly, quarterly, annually</param>
+        /// <param name="type">Type of chart</param>
+        /// <returns></returns>
         private DataTable SetUpTable(DataTable format, int period, int type)
         {
             DataTable formatted = new DataTable();
@@ -300,6 +338,11 @@ namespace FinalProject
         }
 
 
+        /// <summary>
+        /// Redirects to main
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void BackToMain_Click(object sender, EventArgs e)
         {
             Server.Transfer("Main.aspx");

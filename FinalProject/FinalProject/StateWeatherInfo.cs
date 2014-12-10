@@ -1,4 +1,9 @@
-﻿using System;
+﻿///FILE : Logging.cs
+///PROJECT : ASQL - Group Project
+///PROGRAMMER(S) : Nick Whitney, Constantine Grigoriadis, Jim Raithby
+///FIRST VERSION : 12/6/2014
+///DESCRIPTION : Class to represent a single line in the file and a single row in the database
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
